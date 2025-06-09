@@ -9,7 +9,10 @@ import { MisReservasComponent } from './features/reservas/mis-reservas/mis-reser
 import { RestaurantsListComponent } from './features/restaurants/restaurants-list/restaurants-list.component';
 import { SolicitudesRestaurantePanelComponent } from './features/restaurants/solicitudes-restaurante-panel/solicitudes-restaurante-panel.component';
 
-export const routes: Routes = [
+export const routes = [
+  // tus rutas
+
+
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'restaurants', component: RestaurantsComponent },
@@ -55,4 +58,4 @@ export const routes: Routes = [
   },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '**', component: Error404Component },
-];
+] as const;
