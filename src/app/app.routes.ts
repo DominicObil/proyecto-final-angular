@@ -58,4 +58,4 @@ export const routes = [
   },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '**', component: Error404Component },
-] as const;
+];
