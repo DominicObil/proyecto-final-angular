@@ -12,5 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), // Proporciona las rutas de la aplicación
     provideClientHydration(withEventReplay()), // Habilita la hidratación del cliente
     provideHttpClient(), provideAnimationsAsync(), provideAnimationsAsync(), // Proveedor de HttpClient para toda la aplicación
+    
   ],
 };

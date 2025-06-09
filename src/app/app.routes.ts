@@ -13,24 +13,35 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'restaurants', component: RestaurantsComponent },
+
+  // Rutas con parámetros dinámicos: QUITA renderMode o prerender aquí
   {
     path: 'reservar/:restauranteId',
-    loadComponent: () => import('./features/reservas/reserva-form/reserva-form.component').then(m => m.ReservaFormComponent),
-    renderMode: 'server'
+    loadComponent: () =>
+      import('./features/reservas/reserva-form/reserva-form.component').then(m => m.ReservaFormComponent)
   },
   {
+    path: 'reservas-restaurante/:restauranteId',
+    loadComponent: () =>
+      import('./features/reservas/reservas-por-restaurante/reservas-por-restaurante.component').then(m => m.ReservasPorRestauranteComponent)
+  },
+  {
+    path: 'editar-reserva/:id',
+    loadComponent: () =>
+      import('./features/reservas/editar-reserva/editar-reserva.component').then(m => m.EditarReservaComponent),
+    canActivate: [authGuard]
+  },
+
+  // Rutas normales
+  {
     path: 'register',
-    loadComponent: () => import('./features/auth/register/register.component').then(m => m.RegisterComponent)
+    loadComponent: () =>
+      import('./features/auth/register/register.component').then(m => m.RegisterComponent)
   },
   {
     path: 'mis-reservas',
     component: MisReservasComponent,
     canActivate: [authGuard]
-  },
-  {
-    path: 'reservas-restaurante/:restauranteId',
-    loadComponent: () => import('./features/reservas/reservas-por-restaurante/reservas-por-restaurante.component').then(m => m.ReservasPorRestauranteComponent),
-    renderMode: 'server' // <--- AGREGA ESTO AQUÍ
   },
   {
     path: 'mis-restaurantes',
@@ -42,17 +53,11 @@ export const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'editar-reserva/:id',
-    loadComponent: () => import('./features/reservas/editar-reserva/editar-reserva.component').then(m => m.EditarReservaComponent),
-    canActivate: [authGuard],
-    renderMode: 'server'
-  },
-  {
     path: 'solicitar-restaurante',
     loadComponent: () =>
       import('./features/restaurants/solicitud-restaurante-form/solicitud-restaurante-form.component')
         .then(m => m.SolicitudRestauranteFormComponent)
   },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: '**', component: Error404Component },
-] as any; // <--- ¡ESTO SOLUCIONA
+  { path: '**', component: Error404Component }
+];
