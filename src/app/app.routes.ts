@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'restaurants', component: RestaurantsComponent },
 
-  // Rutas con parámetros dinámicos: QUITA renderMode o prerender aquí
+
   {
     path: 'reservar/:restauranteId',
     loadComponent: () =>
