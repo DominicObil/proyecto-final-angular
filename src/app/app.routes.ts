@@ -9,17 +9,14 @@ import { MisReservasComponent } from './features/reservas/mis-reservas/mis-reser
 import { RestaurantsListComponent } from './features/restaurants/restaurants-list/restaurants-list.component';
 import { SolicitudesRestaurantePanelComponent } from './features/restaurants/solicitudes-restaurante-panel/solicitudes-restaurante-panel.component';
 
-export const routes = [
-  // tus rutas
-
-
+export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'restaurants', component: RestaurantsComponent },
   {
     path: 'reservar/:restauranteId',
     loadComponent: () => import('./features/reservas/reserva-form/reserva-form.component').then(m => m.ReservaFormComponent),
-    renderMode: 'server' // <-- agregado aquí
+    renderMode: 'server'
   },
   {
     path: 'register',
@@ -32,7 +29,8 @@ export const routes = [
   },
   {
     path: 'reservas-restaurante/:restauranteId',
-    loadComponent: () => import('./features/reservas/reservas-por-restaurante/reservas-por-restaurante.component').then(m => m.ReservasPorRestauranteComponent)
+    loadComponent: () => import('./features/reservas/reservas-por-restaurante/reservas-por-restaurante.component').then(m => m.ReservasPorRestauranteComponent),
+    renderMode: 'server' // <--- AGREGA ESTO AQUÍ
   },
   {
     path: 'mis-restaurantes',
@@ -41,15 +39,14 @@ export const routes = [
   {
     path: 'panel-solicitudes',
     component: SolicitudesRestaurantePanelComponent,
-    canActivate: [authGuard] // y si quieres, un adminGuard
+    canActivate: [authGuard]
   },
   {
     path: 'editar-reserva/:id',
     loadComponent: () => import('./features/reservas/editar-reserva/editar-reserva.component').then(m => m.EditarReservaComponent),
     canActivate: [authGuard],
-    renderMode: 'server' // <-- agregado aquí
+    renderMode: 'server'
   },
-  // 👉 NUEVA RUTA para el formulario de solicitud de restaurante
   {
     path: 'solicitar-restaurante',
     loadComponent: () =>
@@ -58,4 +55,4 @@ export const routes = [
   },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: '**', component: Error404Component },
-];
+] as any; // <--- ¡ESTO SOLUCIONA
