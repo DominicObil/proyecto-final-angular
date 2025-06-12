@@ -1,39 +1,73 @@
-<div class="reserva-form-bg">
-  <div class="reserva-form-container">
+<div class="reserva-wrapper">
+  <!-- Columna izquierda: mensaje de bienvenida -->
+  <div class="reserva-welcome">
+    <h1>¡Edita tu reserva en segundos!</h1>
+    <p>Revisa tus datos, haz los cambios necesarios y confirma.<br>
+  </div>
+
+  <!-- Columna derecha: formulario de edición -->
+  <div class="reserva-form-panel">
     <h2>Editar reserva</h2>
-    <div *ngIf="error" class="error">{{ error }}</div>
     <div *ngIf="restauranteNombre" class="restaurante-nombre">
       <strong>{{ restauranteNombre }}</strong>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="reserva-form">
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Fecha</mat-label>
-        <input matInput formControlName="fechaReserva" type="date" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Hora</mat-label>
-        <input matInput formControlName="horaReserva" type="time" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Número de personas</mat-label>
-        <input matInput formControlName="numeroPersonas" type="number" min="1" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>ID Turno</mat-label>
-        <input matInput formControlName="turnoId" type="number" required>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Observaciones</mat-label>
-        <input matInput formControlName="comentarios" />
-      </mat-form-field>
-      <div class="form-actions">
-        <button mat-raised-button color="accent" class="reserva-btn" type="submit">
-          Guardar cambios
-        </button>
-        <button mat-button type="button" (click)="irAMisReservas()" class="cancel-btn">
-          Cancelar
-        </button>
+      <div class="form-group">
+        <label>Fecha*</label>
+        <input
+          type="date"
+          formControlName="fechaReserva"
+          required
+        />
       </div>
+      <div class="form-group">
+        <label>Hora*</label>
+        <input
+          type="time"
+          formControlName="horaReserva"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Número de personas*</label>
+        <input
+          type="number"
+          min="1"
+          formControlName="numeroPersonas"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>ID Turno*</label>
+        <input
+          type="number"
+          formControlName="turnoId"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Observaciones</label>
+        <input
+          type="text"
+          formControlName="comentarios"
+        />
+      </div>
+      <button
+        type="submit"
+        class="reserva-btn"
+        [disabled]="form.invalid || loading"
+      >
+        {{ loading ? 'Guardando...' : 'Guardar cambios' }}
+      </button>
+      <button
+        type="button"
+        class="cancel-btn"
+        (click)="irAMisReservas()"
+      >
+        Cancelar
+      </button>
     </form>
+    <div *ngIf="success" class="success-message">{{ success }}</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
   </div>
 </div>

@@ -26,6 +26,9 @@ export class EditarReservaComponent implements OnInit {
   reservaId!: number;
   restauranteNombre: string = '';
   error: string | null = null;
+  loading = false; // ← Esto es lo que faltaba
+  success: string = '';
+
 
   private reservaService = inject(ReservaService);
   private restaurantService = inject(RestaurantService);

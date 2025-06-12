@@ -1,145 +1,137 @@
-/* Fondo oscuro para toda la vista */
-.reserva-form-bg {
-  min-height: 100vh;
-  background: #181818;
+.reserva-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
+  min-height: 100vh;
 }
 
-/* Card contenedor */
-.reserva-form-container {
-  background: #222;
-  border-radius: 18px;
-  box-shadow: 0 4px 32px #000a;
-  padding: 44px 34px 30px 34px;
-  min-width: 320px;
-  max-width: 410px;
-  width: 97vw;
-  margin: 38px auto;
+/* Izquierda: mensaje de bienvenida */
+.reserva-welcome {
+  flex: 1.3;
+  background-image: url("../../../../img/ChatGPT\ Image\ 11\ jun\ 2025\,\ 13_25_02.png");
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 48px 40px 40px 56px;
+}
+
+.reserva-welcome h1 {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.reserva-welcome p {
+  font-size: 1.2rem;
+  color: #eee;
+  margin: 0;
+}
+
+/* Derecha: panel de formulario */
+.reserva-form-panel {
+  flex: 1.2;
+  background: #000;
+  color: #fff;
+  padding: 48px 48px 48px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.reserva-form-container h2 {
-  color: #fff;
-  font-size: 1.4rem;
+.reserva-form-panel h2 {
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 13px;
-  letter-spacing: .3px;
+  margin-bottom: 12px;
   text-align: center;
+  color: #fff;
 }
 
 .restaurante-nombre {
-  color: #ff9100;
-  margin-bottom: 13px;
   text-align: center;
-  font-size: 1.04rem;
-  letter-spacing: .4px;
+  color: orange;
+  font-weight: bold;
+  margin-bottom: 24px;
+  font-size: 1.1rem;
 }
 
 .reserva-form {
   width: 100%;
+  max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
-.error {
-  color: #ff5555;
-  text-align: center;
-  margin: 5px 0 16px 0;
-  font-weight: 600;
-}
-
-/* Angular Material Custom fields */
-::ng-deep .reserva-field .mat-form-field-flex {
-  background: #181818 !important;
-  border-radius: 8px !important;
-  color: #fff !important;
-  box-shadow: none !important;
-}
-::ng-deep .reserva-field .mat-form-field-infix {
-  color: #fff !important;
-}
-::ng-deep .reserva-field .mat-input-element {
-  color: #fff !important;
-  background: transparent !important;
-  font-size: 1rem;
-  padding: 13px 12px !important;
-}
-::ng-deep .reserva-field .mat-form-field-label {
-  color: #ff9100 !important;
-  font-size: 1rem;
-  opacity: 0.97 !important;
-}
-::ng-deep .reserva-field.mat-form-field-appearance-fill .mat-form-field-underline {
-  display: none !important;
-}
-::ng-deep .reserva-field.mat-form-field-appearance-fill .mat-form-field-ripple {
-  display: none !important;
-}
-::ng-deep .reserva-field .mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
-
-/* Botón principal */
-.form-actions {
+.form-group {
   display: flex;
-  gap: 14px;
-  margin-top: 7px;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  color: #eee;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.form-group input {
+  padding: 14px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  background: #e9e9f0;
+  margin-bottom: 0;
+  color: #222;
 }
 
 .reserva-btn {
-  background: #ff9100 !important;
-  color: #fff !important;
-  font-weight: bold !important;
-  font-size: 1.09rem !important;
-  border-radius: 8px !important;
-  padding: 13px 16px !important;
-  letter-spacing: .4px;
-  box-shadow: 0 3px 14px rgba(255,145,0,0.11);
-  transition: background 0.16s;
+  background: #c97103;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  margin-top: 16px;
+  transition: background 0.2s;
+  cursor: pointer;
 }
 
-.reserva-btn:hover:enabled {
-  background: #ffb36b !important;
-  color: #232323 !important;
+.reserva-btn:disabled {
+  background: #b89260;
+  color: #fff;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
-/* Botón cancelar plano */
 .cancel-btn {
-  color: #bbb !important;
-  font-weight: 500 !important;
-  padding: 13px 16px !important;
-  font-size: 1.05rem !important;
-  border-radius: 8px !important;
-  background: transparent !important;
-  text-transform: none !important;
-  letter-spacing: .2px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
 .cancel-btn:hover {
-  color: #ff9100 !important;
-  background: #232323 !important;
+  color: orange;
 }
 
-@media (max-width: 550px) {
-  .reserva-form-container {
-    padding: 30px 7vw 24px 7vw;
-    min-width: 0;
-    max-width: 99vw;
-    margin: 14vw auto 2vw auto;
-  }
-  .form-actions {
-    flex-direction: column;
-    gap: 8px;
-  }
-  .reserva-btn, .cancel-btn {
-    width: 100%;
-    padding: 12px 0 !important;
-    font-size: .97rem !important;
-  }
+.success-message,
+.error-message {
+  margin-top: 16px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.success-message {
+  color: #49d974;
+}
+
+.error-message {
+  color: #ff6565;
 }

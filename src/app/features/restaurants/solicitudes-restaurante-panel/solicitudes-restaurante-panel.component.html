@@ -1,46 +1,50 @@
-<div class="container py-4">
-  <h2>Solicitudes de Restaurantes</h2>
-  
-  <div *ngIf="loading" class="text-center my-4">
-    <div class="spinner-border text-primary" role="status"></div>
-    <div>Cargando solicitudes...</div>
-  </div>
-  
-  <table *ngIf="!loading && solicitudes.length" class="table table-bordered mt-3">
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Dirección</th>
-        <th>Teléfono</th>
-        <th>Capacidad</th>
-        <th>Solicitante</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let s of solicitudes">
-        <td>{{ s.nombre }}</td>
-        <td>{{ s.direccion }}</td>
-        <td>{{ s.telefono }}</td>
-        <td>{{ s.capacidad }}</td>
-        <td>{{ s.owner?.username || 'N/A' }}</td>
-        <td>
-          <button class="btn btn-success btn-sm me-2" (click)="aprobar(s.id)" [disabled]="processing[s.id]">
-            Aprobar
-          </button>
-          <button class="btn btn-danger btn-sm" (click)="rechazar(s.id)" [disabled]="processing[s.id]">
-            Rechazar
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="solicitudes-bg">
+  <div class="solicitudes-container">
+    <h2>Solicitudes de Restaurantes</h2>
+    
+    <div *ngIf="loading" class="solicitudes-loading">
+      <div class="custom-spinner"></div>
+      <div class="loading-text">Cargando solicitudes...</div>
+    </div>
+    
+    <div *ngIf="!loading && solicitudes.length" class="table-responsive">
+      <table class="solicitudes-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Capacidad</th>
+            <th>Solicitante</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of solicitudes">
+            <td>{{ s.nombre }}</td>
+            <td>{{ s.direccion }}</td>
+            <td>{{ s.telefono }}</td>
+            <td>{{ s.capacidad }}</td>
+            <td>{{ s.ownerUsername || 'N/A' }}</td>
+            <td>
+              <button class="btn-accion aprobar" (click)="aprobar(s.id)" [disabled]="processing[s.id]">
+                Aprobar
+              </button>
+              <button class="btn-accion rechazar" (click)="rechazar(s.id)" [disabled]="processing[s.id]">
+                Rechazar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div *ngIf="!loading && !solicitudes.length" class="alert alert-info mt-4">
-    No hay solicitudes pendientes.
-  </div>
+    <div *ngIf="!loading && !solicitudes.length" class="info-message">
+      No hay solicitudes pendientes.
+    </div>
 
-  <div *ngIf="error" class="alert alert-danger mt-3">
-    {{ error }}
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
   </div>
 </div>

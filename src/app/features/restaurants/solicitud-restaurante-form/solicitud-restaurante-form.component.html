@@ -1,35 +1,51 @@
-<mat-card>
-  <h2>Solicita tu Restaurante</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre" />
-      <mat-error *ngIf="form.get('nombre')?.invalid">Nombre requerido (máx 100)</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Dirección</mat-label>
-      <input matInput formControlName="direccion" />
-      <mat-error *ngIf="form.get('direccion')?.invalid">Dirección requerida (máx 200)</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Teléfono</mat-label>
-      <input matInput formControlName="telefono" />
-      <mat-error *ngIf="form.get('telefono')?.invalid">Teléfono debe ser 9 dígitos</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" class="w-100">
-      <mat-label>Capacidad</mat-label>
-      <input matInput formControlName="capacidad" type="number" min="1" />
-      <mat-error *ngIf="form.get('capacidad')?.invalid">Capacidad mínima: 1</mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
-      {{ loading ? 'Enviando...' : 'Enviar solicitud' }}
-    </button>
-    <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
-    <div *ngIf="success" class="success-message">{{ success }}</div>
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-  </form>
-</mat-card>
+<div class="restaurante-solicita-main">
+  <!-- Izquierda: Imagen y texto -->
+  <div class="restaurante-solicita-left">
+    <div class="restaurante-img-bg">
+      <div class="restaurante-overlay"></div>
+      <div class="restaurante-text">
+        <h1>¿Quieres sumar tu restaurante?</h1>
+        <p>Solicita tu ingreso y conecta con más comensales.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Derecha: Formulario -->
+  <div class="restaurante-solicita-right">
+    <div class="restaurante-form-card">
+      <h2>Solicita tu Restaurante</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="solicita-form">
+        <div class="solicita-row">
+          <input type="text" placeholder="Nombre*" formControlName="nombre" maxlength="100" required />
+          <div class="input-error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+            Nombre requerido (máx 100)
+          </div>
+        </div>
+        <div class="solicita-row">
+          <input type="text" placeholder="Dirección*" formControlName="direccion" maxlength="200" required />
+          <div class="input-error" *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched">
+            Dirección requerida (máx 200)
+          </div>
+        </div>
+        <div class="solicita-row">
+          
+          <input type="text" placeholder="Teléfono*" formControlName="telefono" maxlength="9" required />
+          <div class="input-error" *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched">
+            Teléfono debe ser 9 dígitos
+          </div>
+        </div>
+        <div class="solicita-row">
+          <input type="number" placeholder="Capacidad*" formControlName="capacidad" min="1" required />
+          <div class="input-error" *ngIf="form.get('capacidad')?.invalid && form.get('capacidad')?.touched">
+            Capacidad mínima: 1
+          </div>
+        </div>
+        <button class="btn-accion aprobar" type="submit" [disabled]="form.invalid || loading">
+          {{ loading ? 'Enviando...' : 'Enviar solicitud' }}
+        </button>
+        <div class="custom-spinner" *ngIf="loading"></div>
+        <div *ngIf="success" class="success-message">{{ success }}</div>
+        <div *ngIf="error" class="error-message">{{ error }}</div>
+      </form>
+    </div>
+  </div>
+</div>

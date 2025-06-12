@@ -26,7 +26,9 @@ export class SolicitudesRestaurantePanelComponent implements OnInit {
     this.error = null;
     this.solicitudService.getSolicitudes().subscribe({
       next: (data) => {
-        this.solicitudes = data;
+        // Aquí el cambio importante
+        console.log('Respuesta de solicitudes:', data); // Para debug
+        this.solicitudes = data.content; // <-- Ahora toma solo el array real
         this.loading = false;
       },
       error: (err) => {
@@ -36,33 +38,40 @@ export class SolicitudesRestaurantePanelComponent implements OnInit {
     });
   }
 
-  aprobar(id: number) {
-    this.processing[id] = true;
-    this.error = null;
-    this.solicitudService.aprobarSolicitud(id).subscribe({
-      next: () => {
-        this.solicitudes = this.solicitudes.filter(s => s.id !== id);
-        this.processing[id] = false;
-      },
-      error: () => {
-        this.error = 'Error al aprobar la solicitud';
-        this.processing[id] = false;
-      }
-    });
-  }
+aprobar(id: number) {
+  this.processing[id] = true;
+  this.error = null;
+  this.solicitudService.aprobarSolicitud(id).subscribe({
+    next: () => {
+      this.fetchSolicitudes(); // <--- recarga todo
+      this.processing[id] = false;
+    },
+    error: (err) => {
+      this.error = 'Error al aprobar la solicitud';
+      this.processing[id] = false;
+    }
+  });
+}
 
-  rechazar(id: number) {
-    this.processing[id] = true;
-    this.error = null;
-    this.solicitudService.rechazarSolicitud(id).subscribe({
-      next: () => {
+
+rechazar(id: number) {
+  this.processing[id] = true;
+  this.error = null;
+  this.solicitudService.rechazarSolicitud(id).subscribe({
+    next: () => {
+      this.solicitudes = this.solicitudes.filter(s => s.id !== id);
+      this.processing[id] = false;
+    },
+    error: (err) => {
+      if (err.status === 404) {
         this.solicitudes = this.solicitudes.filter(s => s.id !== id);
-        this.processing[id] = false;
-      },
-      error: () => {
+        this.error = 'La solicitud ya no existe o fue procesada.';
+      } else {
         this.error = 'Error al rechazar la solicitud';
-        this.processing[id] = false;
       }
-    });
-  }
+      this.processing[id] = false;
+    }
+  });
+}
+
 }

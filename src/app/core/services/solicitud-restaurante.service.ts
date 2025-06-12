@@ -22,15 +22,16 @@ export class SolicitudRestauranteService {
       'Content-Type': 'application/json'
     });
     return this.http.post(this.baseUrl, data, { headers });
-  
-  
   }
 
-
-  getSolicitudes(): Observable<any[]> {
+  /** Obtiene solicitudes paginadas */
+  getSolicitudes(page = 0, size = 10): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.get<any[]>(this.baseUrl, { headers });
+    return this.http.get<any>(
+      `${this.baseUrl}/solicitudes?page=${page}&size=${size}`,
+      { headers }
+    );
   }
 
   /** Aprueba una solicitud (crea el restaurante real para ese owner) */
@@ -40,11 +41,10 @@ export class SolicitudRestauranteService {
     return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
   }
 
-  /** Rechaza o elimina la solicitud */
+  /** Rechaza o elimina la solicitud (requiere endpoint DELETE en backend) */
   rechazarSolicitud(id: number): Observable<any> {
     const token = this.authService.getToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.delete(`${this.baseUrl}/${id}`, { headers });
   }
-
 }

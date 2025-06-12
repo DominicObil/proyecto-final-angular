@@ -6,15 +6,18 @@
     <nav class="header-nav" [class.open]="menuOpen">
       <li *ngIf="isLoggedIn"><a routerLink="/restaurants">Restaurantes</a></li>
       <li *ngIf="isLoggedIn"><a routerLink="/mis-reservas">Mis Reservas</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/panel-solicitudes">Solicitudes</a></li>
+     <li *ngIf="isLoggedIn"><a routerLink="/solicitar-restaurante">Unete</a></li>
 
 
     </nav>
   
-    <div class="header-actions">
-  <button class="btn-outline" (click)="irALogin()">Iniciar sesión</button>
-  <button class="btn-primary" (click)="irARegistro()">Registrarse</button>
+  <div class="header-actions">
+  <button class="btn-outline" (click)="irALogin()" *ngIf="!isLoggedIn">Iniciar sesión</button>
+  <button class="btn-primary" (click)="irARegistro()" *ngIf="!isLoggedIn">Registrarse</button>
   <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
 </div>
+
 
   
     <button class="hamburger" (click)="toggleMenu()" aria-label="Menú">

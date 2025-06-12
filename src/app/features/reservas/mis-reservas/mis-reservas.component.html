@@ -1,16 +1,18 @@
 <div class="reservas-bg">
   <div class="reservas-container">
     <h2>Gestiona tus reservas</h2>
-    <div *ngIf="error" class="error">{{ error }}</div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
     <div *ngIf="reservas.length > 0; else sinReservas">
       <div *ngFor="let r of reservas" class="reserva-card">
-        <img
-          *ngIf="r.restauranteImagen"
-          [src]="r.restauranteImagen"
-          alt="Imagen restaurante"
-          class="restaurante-img"
-        />
-        <div class="reserva-info">
+        <div class="reserva-card-img">
+          <img
+            *ngIf="r.restauranteImagen"
+            [src]="r.restauranteImagen"
+            alt="Imagen restaurante"
+            class="restaurante-img"
+          />
+        </div>
+        <div class="reserva-card-info">
           <div class="restaurante-nombre">{{ r.restauranteNombre || 'Restaurante #' + r.restauranteId }}</div>
           <div class="reserva-fecha">
             {{ r.fechaReserva | date: 'EEEE, d ' }}de {{ r.fechaReserva | date: 'MMMM' }}, {{ r.horaReserva }}
@@ -19,14 +21,17 @@
             {{ r.numeroPersonas }} persona{{ r.numeroPersonas > 1 ? 's' : '' }}
           </div>
         </div>
-        <div class="reserva-actions">
-          <button mat-raised-button color="accent" (click)="editarReserva(r.id)">Modificar</button>
-          <button mat-raised-button color="warn" (click)="borrarReserva(r.id)">Eliminar</button>
+        <div class="reserva-card-actions">
+          <button class="reserva-btn editar" (click)="editarReserva(r.id)">Modificar</button>
+          <button class="reserva-btn eliminar" (click)="borrarReserva(r.id)">Eliminar</button>
         </div>
       </div>
     </div>
     <ng-template #sinReservas>
-      <p>No tienes reservas aún.</p>
+      <div class="sin-reservas">
+        <p>No tienes reservas aún.</p>
+        <a routerLink="/restaurants" class="reserva-btn call-to-action">Reservar ahora</a>
+      </div>
     </ng-template>
   </div>
 </div>

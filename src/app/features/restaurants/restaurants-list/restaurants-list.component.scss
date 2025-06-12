@@ -1,10 +1,12 @@
-body, .restaurantes-bg {
-  background: #181818 !important;
+.restaurantes-bg {
+    background-color: #000;
+
   min-height: 100vh;
 }
 
 .restaurantes-bg {
   padding: 0;
+    background-color: #000;
   min-height: 100vh;
 }
 
@@ -27,7 +29,7 @@ body, .restaurantes-bg {
 }
 
 .restaurante-card {
-  background: #232323;
+   background-color: #000;
   border-radius: 13px;
   padding: 18px 17px 15px 17px;
   display: flex;
@@ -51,7 +53,7 @@ body, .restaurantes-bg {
   height: 62px;
   border-radius: 50%;
   overflow: hidden;
-  background: #181818;
+  background-color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
