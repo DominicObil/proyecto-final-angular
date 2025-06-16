@@ -38,14 +38,14 @@ export class ReservaFormComponent implements OnInit {
   private router = inject(Router);
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
-      fechaReserva: ['', Validators.required],
-      horaReserva: ['', Validators.required],
-      numeroPersonas: [1, [Validators.required, Validators.min(1)]],
-      comentarios: [''],
-      turnoId: [null, Validators.required],
-      restauranteId: [{ value: null, disabled: true }, Validators.required], // Disabled para que no lo cambien
-    });
+  this.form = this.fb.group({
+  fechaReserva: ['', Validators.required],
+  horaReserva: ['', Validators.required],
+  numeroPersonas: [1, [Validators.required, Validators.min(1)]],
+  comentarios: [''],
+  restauranteId: [{ value: null, disabled: true }, Validators.required],
+});
+
   }
 
   ngOnInit(): void {

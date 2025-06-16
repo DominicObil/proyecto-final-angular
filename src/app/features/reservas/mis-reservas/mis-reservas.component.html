@@ -13,7 +13,7 @@
           />
         </div>
         <div class="reserva-card-info">
-          <div class="restaurante-nombre">{{ r.restauranteNombre || 'Restaurante #' + r.restauranteId }}</div>
+  <div class="restaurante-nombre">{{ r.restauranteNombre }}</div>
           <div class="reserva-fecha">
             {{ r.fechaReserva | date: 'EEEE, d ' }}de {{ r.fechaReserva | date: 'MMMM' }}, {{ r.horaReserva }}
           </div>

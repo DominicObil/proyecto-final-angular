@@ -1,45 +1,48 @@
-<div class="restaurante-solicita-main">
-  <!-- Izquierda: Imagen y texto -->
+<div class="restaurante-solicita-fullpage">
+  <!-- Izquierda: Imagen y texto motivacional -->
   <div class="restaurante-solicita-left">
     <div class="restaurante-img-bg">
       <div class="restaurante-overlay"></div>
       <div class="restaurante-text">
-        <h1>¿Quieres sumar tu restaurante?</h1>
+        <h1>¿Quieres sumar<br>tu restaurante?</h1>
         <p>Solicita tu ingreso y conecta con más comensales.</p>
       </div>
     </div>
   </div>
-  <!-- Derecha: Formulario -->
+  <!-- Derecha: Formulario (fondo negro real) -->
   <div class="restaurante-solicita-right">
-    <div class="restaurante-form-card">
+    <div class="restaurante-form-panel">
       <h2>Solicita tu Restaurante</h2>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="solicita-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="solicita-form" autocomplete="off">
         <div class="solicita-row">
-          <input type="text" placeholder="Nombre*" formControlName="nombre" maxlength="100" required />
+          <label for="nombre">Nombre*</label>
+          <input id="nombre" type="text" placeholder="Ej: Casa Manolo" formControlName="nombre" maxlength="100" required />
           <div class="input-error" *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
             Nombre requerido (máx 100)
           </div>
         </div>
         <div class="solicita-row">
-          <input type="text" placeholder="Dirección*" formControlName="direccion" maxlength="200" required />
+          <label for="direccion">Dirección*</label>
+          <input id="direccion" type="text" placeholder="Ej: Av. Principal 123" formControlName="direccion" maxlength="200" required />
           <div class="input-error" *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched">
             Dirección requerida (máx 200)
           </div>
         </div>
         <div class="solicita-row">
-          
-          <input type="text" placeholder="Teléfono*" formControlName="telefono" maxlength="9" required />
+          <label for="telefono">Teléfono*</label>
+          <input id="telefono" type="text" placeholder="Ej: 654123987" formControlName="telefono" maxlength="9" required />
           <div class="input-error" *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched">
             Teléfono debe ser 9 dígitos
           </div>
         </div>
         <div class="solicita-row">
-          <input type="number" placeholder="Capacidad*" formControlName="capacidad" min="1" required />
+          <label for="capacidad">Capacidad*</label>
+          <input id="capacidad" type="number" placeholder="Capacidad máxima" formControlName="capacidad" min="1" required />
           <div class="input-error" *ngIf="form.get('capacidad')?.invalid && form.get('capacidad')?.touched">
             Capacidad mínima: 1
           </div>
         </div>
-        <button class="btn-accion aprobar" type="submit" [disabled]="form.invalid || loading">
+        <button class="main-button" type="submit" [disabled]="form.invalid || loading">
           {{ loading ? 'Enviando...' : 'Enviar solicitud' }}
         </button>
         <div class="custom-spinner" *ngIf="loading"></div>

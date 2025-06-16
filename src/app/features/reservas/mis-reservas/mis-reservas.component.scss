@@ -1,62 +1,74 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
 .reservas-bg {
-  min-height: 100vh;
+
   background: #000;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-  padding: 60px 0;
+  align-items: flex-start;
+  padding-top: 0;
 }
 
 .reservas-container {
   width: 100%;
-  max-width: 700px;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 38px 18px 38px 18px;
+  display: flex;
+  flex-direction: column;
   background: #000;
-  border-radius: 20px;
-  box-shadow: 0 6px 36px rgba(0,0,0,0.18);
-  padding: 36px 32px;
-  color: #fff;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-h2 {
-  text-align: center;
+.reservas-container h2 {
   font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 36px;
-  letter-spacing: 1px;
   color: #fff;
+  font-weight: 700;
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 10px;
 }
 
 .reserva-card {
+  background: #18181c;
+  border-radius: 13px;
   display: flex;
   align-items: center;
-  background: #212121;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.13);
-  margin-bottom: 26px;
-  padding: 18px 18px 18px 12px;
   gap: 18px;
-  transition: box-shadow 0.2s;
+  margin-bottom: 22px;
+  padding: 18px 16px;
+  box-shadow: none;
+  border: 1.2px solid #23243a;
+  transition: box-shadow 0.16s, border 0.16s, background 0.16s;
+  min-height: 90px;
 }
-
 .reserva-card:hover {
-  box-shadow: 0 8px 28px rgba(253, 148, 43, 0.14);
+  background: #23243a;
+  border: 1.2px solid #6c63ff44;
+  box-shadow: 0 4px 16px 0 #19184d1c;
 }
 
 .reserva-card-img {
-  min-width: 74px;
-  max-width: 74px;
-  height: 74px;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 11px;
   overflow: hidden;
-  border-radius: 10px;
-  background: #343434;
+  background: #23243a;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .restaurante-img {
-  width: 74px;
-  height: 74px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -66,168 +78,132 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  min-width: 0;
 }
 
 .restaurante-nombre {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #ff9900;
-  margin-bottom: 3px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .reserva-fecha {
+  color: #bbbbbb;
   font-size: 1rem;
-  color: #dadada;
+  font-weight: 500;
+  margin-bottom: 1px;
 }
-
 .reserva-personas {
-  font-size: .95rem;
-  color: #bbb;
+  color: #ff9800;
+  font-size: 0.97rem;
+  font-weight: 500;
 }
 
 .reserva-card-actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
   margin-left: 12px;
 }
 
 .reserva-btn {
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  border-radius: 7px;
+  padding: 7px 18px;
+  font-size: 0.97rem;
   font-weight: 600;
-  padding: 8px 18px;
   cursor: pointer;
-  transition: background .18s, color .18s;
+  transition: background 0.14s, color 0.14s, box-shadow 0.12s;
+  background: #23243a;
+  color: #eee;
+  box-shadow: none;
   outline: none;
 }
-
 .reserva-btn.editar {
-  background: #fcad03;
-  color: #222;
+  background: #23243a;
+  color: #6c63ff;
 }
-
 .reserva-btn.editar:hover {
-  background: #e98a01;
+  background: #282a36;
   color: #fff;
 }
-
 .reserva-btn.eliminar {
-  background: #ff3939;
+  background: #23243a;
+  color: #ff6363;
+}
+.reserva-btn.eliminar:hover {
+  background: #2a1818;
   color: #fff;
 }
-
-.reserva-btn.eliminar:hover {
-  background: #b61e1e;
+.reserva-btn.call-to-action {
+  margin-top: 18px;
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  font-size: 1.06rem;
+  box-shadow: 0 2px 8px 0 #6c63ff33;
 }
-
-.error-message {
-  color: #ff6565;
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 500;
+.reserva-btn.call-to-action:hover {
+  background: #4e47b3;
 }
 
 .sin-reservas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  background: #18181c;
+  border-radius: 13px;
+  margin-top: 35px;
+  border: 1.2px solid #23243a;
+}
+.sin-reservas p {
+  color: #aaa;
+  font-size: 1.13rem;
+  margin-bottom: 13px;
+  margin-top: 0;
+}
+
+.error-message {
+  color: #ff6161;
+  background: #1a1010;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 0.97rem;
+  margin-bottom: 20px;
   text-align: center;
-  margin-top: 56px;
+  border: 1px solid #332222;
 }
 
-.call-to-action {
-  background: #fcad03;
-  color: #222;
-  font-weight: bold;
-  margin-top: 14px;
-  display: inline-block;
-  border-radius: 8px;
-  padding: 12px 32px;
-  text-decoration: none;
-  transition: background .18s, color .18s;
-}
-
-.call-to-action:hover {
-  background: #fff;
-  color: #fcad03;
-  border: 2px solid #fcad03;
-}
-
-/* ------ RESPONSIVE ------ */
-
-/* Tablet (max 900px) */
-@media (max-width: 900px) {
-  .reservas-container {
-    max-width: 95vw;
-    padding: 26px 10px;
-  }
-  .reserva-card {
-    padding: 14px 10px 14px 8px;
-    gap: 10px;
-  }
-  .reserva-card-img,
-  .restaurante-img {
-    min-width: 60px;
-    max-width: 60px;
-    height: 60px;
-  }
-  .reserva-card-info {
-    gap: 2px;
-  }
-  h2 {
-    font-size: 1.45rem;
-  }
-}
-
-/* Mobile (max 600px) */
 @media (max-width: 600px) {
-  .reservas-bg {
-    padding: 16px 0;
-  }
   .reservas-container {
-    max-width: 99vw;
-    padding: 14px 2vw;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 28px 3vw 38px 3vw;
   }
   .reserva-card {
     flex-direction: column;
-    align-items: flex-start;
-    padding: 12px 8px;
-    gap: 9px;
-    margin-bottom: 20px;
+    align-items: stretch;
+    gap: 10px;
   }
-  .reserva-card-img,
-  .restaurante-img {
-    min-width: 54px;
-    max-width: 54px;
-    height: 54px;
-    margin-bottom: 4px;
+  .reserva-card-img {
+    width: 100%;
+    max-width: 250px;
+    height: 45vw;
+    max-height: 110px;
+    margin: 0 auto 10px auto;
   }
   .reserva-card-actions {
     flex-direction: row;
-    width: 100%;
-    gap: 8px;
+    gap: 12px;
     margin-left: 0;
-    margin-top: 6px;
-    justify-content: flex-end;
+    margin-top: 12px;
   }
-  .reserva-btn {
-    width: 50%;
-    padding: 10px 0;
-    font-size: 0.96rem;
-  }
-  .restaurante-nombre,
-  .reserva-fecha,
-  .reserva-personas {
-    font-size: 0.99rem;
-  }
-  h2 {
-    font-size: 1.2rem;
-    margin-bottom: 18px;
-  }
-  .call-to-action {
-    width: 100%;
-    padding: 13px 0;
-    font-size: 1.03rem;
+  .sin-reservas {
+    padding: 25px 8px;
   }
 }

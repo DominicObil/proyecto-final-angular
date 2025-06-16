@@ -4,8 +4,8 @@
 
   <div *ngIf="!loading && !error && restaurantes.length > 0" class="restaurantes-grid">
     <div class="restaurante-card" *ngFor="let r of restaurantes">
-      <div class="rest-img-wrap">
-        <img [src]="r.imagen" alt="Imagen restaurante" class="rest-img" />
+      <div class="rest-logo-placeholder">
+        {{ r.nombre ? r.nombre.charAt(0).toUpperCase() : '' }}
       </div>
       <div class="rest-info">
         <div class="rest-nombre">{{ r.nombre }}</div>

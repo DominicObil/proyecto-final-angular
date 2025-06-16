@@ -53,6 +53,30 @@ getMisRestaurantes(): Observable<any[]> {
 }
 
 
+deleteRestaurant(id: number): Observable<any> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+  return this.http.delete(`${this.baseUrl}/${id}`, { headers });
+}
+
+updateRestaurant(id: number, restaurante: any): Observable<any> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+  return this.http.put(`${this.baseUrl}/${id}`, restaurante, { headers });
+}
+
+searchRestaurants(filtro: string): Observable<any> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+
+  return this.http.get(`${this.baseUrl}?search=${filtro}`, { headers });
+}
 
 
  

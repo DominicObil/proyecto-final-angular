@@ -6,7 +6,6 @@
     padding: 60px 40px;
     color: #ffffff;
     gap: 40px;
-  min-height: 100vh;
 
   
     .hero-left {
@@ -64,17 +63,17 @@
       }
     }
   
-    .hero-right {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-  
-      img {
-        max-width: 300px;
-        height: auto;
-      }
-    }
-  }
+   .hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background-image: url('../../../img/ChatGPT\ Image\ 16\ jun\ 2025\,\ 22_10_40.png'); // cambia a la ruta correcta
+  background-size: contain; // o cover, si prefieres llenar
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px; // dale altura visible
+}
+}
   
   @media (max-width: 768px) {
     .hero {

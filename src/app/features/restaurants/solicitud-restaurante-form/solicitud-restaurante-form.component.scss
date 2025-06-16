@@ -1,199 +1,256 @@
-.restaurante-solicita-main {
-  display: flex;
-  min-height: 100vh;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background: #000;
 }
 
-/* Izquierda: Imagen y texto */
-.restaurante-solicita-left {
-  flex: 1.1;
+/* Pantalla completa, sin márgenes */
+.restaurante-solicita-fullpage {
+ 
+  display: flex;
+  background: #000;
+  align-items: stretch;
+  justify-content: stretch;
   position: relative;
+}
+
+/* Imagen ocupa el 60-65% */
+.restaurante-solicita-left {
+  flex: 1.5;
+  min-width: 0;
+  max-width: 65vw;
   display: flex;
   align-items: stretch;
-  min-width: 0;
+  position: relative;
+  background: #000;
 }
+
 .restaurante-img-bg {
-  background-image: url('../../../../img/ChatGPT\ Image\ 11\ jun\ 2025\,\ 15_48_27.png'); /* Cambia por tu imagen de restaurante */
-  background-size: cover;
-  background-position: center;
+  flex: 1;
   width: 100%;
+  height: 100vh;
+  min-height: 480px;
   position: relative;
   display: flex;
-  align-items: flex-end;
-  min-height: 400px;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../../../img/ChatGPT\ Image\ 11\ jun\ 2025\,\ 12_58_21.png");
 }
+
 .restaurante-overlay {
   position: absolute;
-  inset: 0;
-  background: rgba(18,18,18,0.65);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000c;
   z-index: 1;
-  border-radius: 0;
+  /* Puedes hacer el overlay más oscuro si quieres */
 }
+
 .restaurante-text {
   position: relative;
   z-index: 2;
   color: #fff;
-  padding: 48px 36px;
-  width: 100%;
-  text-shadow: 0 2px 20px #111a;
-}
-.restaurante-text h1 {
-  font-size: 2.1rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.restaurante-text p {
-  font-size: 1.18rem;
-  color: #fcad03;
-  margin-bottom: 0;
+  text-align: left;
+  padding: 0 6vw;
+  max-width: 520px;
 }
 
-/* Derecha: Formulario */
+.restaurante-text h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.13;
+  margin-bottom: 24px;
+  margin-top: 0;
+  letter-spacing: 0.6px;
+  text-shadow: 0 2px 18px #000b;
+}
+
+.restaurante-text p {
+  font-size: 1.24rem;
+  font-weight: 400;
+  color: #e2e2e2;
+  margin-top: 0;
+  text-shadow: 0 1px 10px #000a;
+}
+
+/* Formulario ocupa el resto y fondo negro real */
 .restaurante-solicita-right {
   flex: 1;
+  min-width: 340px;
   background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  padding: 0;
 }
-.restaurante-form-card {
+
+.restaurante-form-panel {
   width: 100%;
-  max-width: 370px;
-  background: none;
-  color: #fff;
-  padding: 12px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  max-width: 400px;
+  background: #000;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 42px 0;
 }
-.restaurante-form-card h2 {
-  margin-bottom: 22px;
-  font-size: 1.38rem;
-  font-weight: bold;
+
+.restaurante-form-panel h2 {
+  font-size: 1.39rem;
+  font-weight: 700;
   color: #fff;
-  text-align: center;
+  margin-bottom: 29px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  padding-left: 6px;
 }
+
 .solicita-form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 10px;
 }
+
 .solicita-row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  margin-bottom: 10px;
 }
-.solicita-row input {
-  padding: 12px 10px;
-  border-radius: 7px;
-  border: none;
+
+.solicita-row label {
+  color: #b1b1b1;
   font-size: 1rem;
-  background: #e9e9f0;
-  color: #191919;
+  font-weight: 500;
+  margin-bottom: 6px;
+  margin-left: 3px;
+}
+
+.solicita-form input[type="text"],
+.solicita-form input[type="number"] {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1.5px solid #35395a;
+  background: #191921;
+  color: #ededed;
+  font-size: 1rem;
+  font-weight: 500;
   outline: none;
+  transition: border 0.2s, background 0.2s;
   margin-bottom: 0;
-  transition: box-shadow 0.16s;
+  box-sizing: border-box;
 }
-.solicita-row input:focus {
-  box-shadow: 0 0 0 2px #fcad03;
+.solicita-form input:focus {
+  border-color: #6c63ff;
+  background: #22234d;
 }
+
 .input-error {
-  color: #ff6565;
-  font-size: 0.96rem;
+  color: #ff6161;
+  background: none;
+  font-size: 0.97rem;
+  padding: 4px 2px 0 2px;
   min-height: 18px;
 }
-.btn-accion.aprobar {
-  background: #fcad03;
-  color: #181818;
-  font-weight: 600;
-  border: none;
-  border-radius: 7px;
-  padding: 13px;
-  font-size: 1.09rem;
-  cursor: pointer;
-  margin-top: 10px;
-  margin-bottom: 7px;
-  transition: background 0.18s, color 0.18s;
-}
-.btn-accion.aprobar:disabled {
-  background: #a98d58;
+
+.main-button {
+  width: 100%;
+  padding: 13px 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff9600 30%, #ff7300 90%);
   color: #fff;
+  border: none;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  margin-top: 16px;
+  margin-bottom: 0;
+  transition: background 0.16s, box-shadow 0.15s;
+  box-shadow: 0 2px 16px 0 #ff73005a;
+}
+.main-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff7300 10%, #ffb52e 100%);
+}
+.main-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  background: #333;
 }
+
 .custom-spinner {
-  width: 28px;
-  height: 28px;
-  border: 3px solid #fcad03;
-  border-bottom: 3px solid transparent;
+  margin: 18px auto;
+  border: 4px solid #23243a;
+  border-top: 4px solid #ff9600;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 14px auto;
+  width: 30px;
+  height: 30px;
+  animation: spin 0.9s linear infinite;
 }
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
+
 .success-message {
-  color: #49d974;
-  margin-top: 8px;
-  font-size: 1.07rem;
+  color: #19ce88;
+  background: #122f24;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  margin-top: 16px;
   text-align: center;
 }
 .error-message {
-  color: #ff6565;
-  margin-top: 8px;
-  font-size: 1.07rem;
+  color: #ff6161;
+  background: #1b1111;
+  border-radius: 6px;
+  padding: 9px 14px;
+  font-size: 1rem;
+  margin-top: 13px;
   text-align: center;
 }
 
-/* RESPONSIVE */
+/* Responsive */
+@media (max-width: 1100px) {
+  .restaurante-solicita-left { max-width: 56vw; }
+}
 @media (max-width: 900px) {
-  .restaurante-solicita-main {
+  .restaurante-solicita-fullpage {
     flex-direction: column;
+    min-height: auto;
   }
-  .restaurante-solicita-left,
-  .restaurante-solicita-right {
-    flex: unset;
+  .restaurante-solicita-left, .restaurante-solicita-right {
+    max-width: 100vw;
     min-width: 0;
-    width: 100%;
+    width: 100vw;
+    height: auto;
+    padding: 0;
   }
   .restaurante-img-bg {
-    min-height: 260px;
+    height: 210px;
+    min-height: 140px;
+    max-height: 320px;
   }
   .restaurante-text {
-    padding: 30px 12vw 18px 12vw;
-    text-align: left;
+    padding: 0 8vw;
+    text-align: center;
+    width: 100%;
   }
   .restaurante-solicita-right {
-    padding: 18px 0;
+    padding: 0 4vw;
+  }
+  .restaurante-form-panel {
+    padding: 28px 0;
   }
 }
 @media (max-width: 600px) {
-  .restaurante-solicita-main {
-    flex-direction: column;
-    min-height: unset;
-  }
-  .restaurante-img-bg {
-    min-height: 150px;
+  .restaurante-form-panel {
+    padding: 15px 0;
   }
   .restaurante-text {
-    padding: 20px 5vw 12px 5vw;
-  }
-  .restaurante-form-card {
-    max-width: 99vw;
-    padding: 0;
-  }
-  .solicita-form {
-    gap: 10px;
-  }
-  .solicita-row input {
-    font-size: 0.97rem;
-    padding: 10px 7px;
-  }
-  .btn-accion.aprobar {
+    padding: 0 3vw;
     font-size: 1rem;
-    padding: 10px 0;
+  }
+  .restaurante-form-panel h2 {
+    font-size: 1.07rem;
   }
 }

@@ -1,6 +1,19 @@
 <div class="reserva-list-bg">
+  <h2 class="reserva-titulo">📅 Gestión de Reservas</h2>
+
   <div *ngIf="loading" class="reserva-list-loading">Cargando reservas...</div>
+
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div class="reserva-list-fecha-selector">
+    <label for="fecha">Reservas para el día:</label>
+    <input
+      type="date"
+      id="fecha"
+      [value]="fechaActual"
+      (change)="onFechaChange($event)"
+    />
+  </div>
 
   <div *ngIf="!loading && !error && reservas.length > 0" class="reserva-list-grid">
     <div class="reserva-list-card" *ngFor="let r of reservas">
@@ -27,11 +40,16 @@
         </div>
         <div class="reserva-list-row">
           <span class="label">Estado:</span>
-          <span class="value estado" [ngClass]="{
-            'pendiente': r.estado === 'pendiente',
-            'confirmada': r.estado === 'confirmada',
-            'cancelada': r.estado === 'cancelada'
-          }">{{ r.estado }}</span>
+          <select
+            class="estado-select"
+            [ngClass]="r.estado.toLowerCase()"
+            [value]="r.estado"
+            (change)="onEstadoChange($event, r.id)"
+          >
+            <option value="PENDIENTE">pendiente</option>
+            <option value="CONFIRMADA">confirmada</option>
+            <option value="CANCELADA">cancelada</option>
+          </select>
         </div>
       </div>
       <div class="reserva-list-actions">

@@ -1,0 +1,57 @@
+<div class="admin-rest-bg">
+  <div class="admin-rest-container">
+    <h2>Administrar Restaurantes</h2>
+
+    <!-- Buscador -->
+    <form [formGroup]="searchForm" class="buscador-form">
+      <input class="buscador-input" formControlName="search" placeholder="Buscar por nombre, dirección...">
+    </form>
+
+    <div class="table-responsive">
+      <table class="admin-rest-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let restaurante of filteredRestaurantes">
+            <!-- No edición -->
+            <ng-container *ngIf="editingRestaurante?.id !== restaurante.id; else editRow">
+              <td>{{ restaurante.nombre }}</td>
+              <td>{{ restaurante.direccion }}</td>
+              <td>
+                <button class="btn-naranja btn-sm" (click)="iniciarEdicion(restaurante)">Editar</button>
+                <button class="btn-gris btn-sm" (click)="borrarRestaurante(restaurante.id)">Borrar</button>
+              </td>
+            </ng-container>
+            <!-- Edición inline -->
+            <ng-template #editRow>
+              <form [formGroup]="editForm" class="edit-form-inline">
+                <td>
+                  <input class="buscador-input" formControlName="nombre">
+                </td>
+                <td>
+                  <input class="buscador-input" formControlName="direccion">
+                </td>
+                <td>
+                  <button class="btn-naranja btn-sm" (click)="guardarEdicion()">Guardar</button>
+                  <button class="btn-gris btn-sm" (click)="cancelarEdicion()">Cancelar</button>
+                </td>
+              </form>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Paginación -->
+    <div class="admin-rest-paginacion">
+      <button class="btn-gris" [disabled]="page === 0" (click)="paginaAnterior()">Anterior</button>
+      <span>Página {{ page + 1 }} de {{ totalPages }}</span>
+      <button class="btn-gris" [disabled]="page >= totalPages - 1" (click)="siguientePagina()">Siguiente</button>
+    </div>
+  </div>
+</div>

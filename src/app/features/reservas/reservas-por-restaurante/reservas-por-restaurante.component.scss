@@ -1,158 +1,256 @@
-body, .reserva-list-bg {
-  background: #181818 !important;
-  min-height: 100vh;
-}
-.reserva-list-bg {
-  min-height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+html, body {
+  height: 100%;
+  margin: 0;
   padding: 0;
+  background: #000;
+  font-family: 'Poppins', sans-serif;
 }
 
-.reserva-list-loading,
-.reserva-list-vacio {
-  color: #bbb;
+.reserva-titulo {
   text-align: center;
-  font-size: 1.08rem;
-  padding: 40px 0 26px 0;
-  font-family: 'Montserrat', Arial, sans-serif;
+  color: #ff9600;
+  font-size: 1.8rem;
+  margin-top: 36px;
+  text-shadow: 0 0 8px rgba(255, 150, 0, 0.2);
+}
+
+.reserva-list-bg {
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.reserva-list-loading {
+  color: #bcbcbc;
+  font-size: 1.13rem;
+  text-align: center;
+  margin-top: 48px;
+}
+
+.alert-danger {
+  color: #ff6161;
+  background: #1b1111;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  margin: 24px auto 0 auto;
+  max-width: 420px;
+  text-align: center;
+  border: 1px solid #332222;
+}
+
+.reserva-list-fecha-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0 12px 0;
+  color: #bcbcbc;
+  font-size: 1.05rem;
+}
+
+.reserva-list-fecha-selector label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-shadow: 0 0 4px rgba(255, 150, 0, 0.2);
+}
+
+.reserva-list-fecha-selector input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1.2px solid #444;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border 0.2s, background-color 0.2s;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" opacity=".3"/><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 38px;
+}
+
+.reserva-list-fecha-selector input[type="date"]:hover {
+  border-color: #ff9600;
+}
+
+.reserva-list-fecha-selector input[type="date"]:focus {
+  outline: none;
+  border-color: #ff9600;
+  background-color: #2a2a2a;
 }
 
 .reserva-list-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-  gap: 22px;
-  padding: 40px 3vw 24px 3vw;
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 28px;
+  padding: 50px 32px 32px 32px;
+  box-sizing: border-box;
 }
 
 .reserva-list-card {
-  background: #232323;
+  background: linear-gradient(145deg, #1a1a1d, #232326);
   border-radius: 13px;
-  box-shadow: 0 2px 16px #0007;
-  padding: 20px 22px 14px 22px;
+  padding: 20px 18px;
+  border: 1.2px solid #23243a;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 170px;
-  transition: border 0.16s, box-shadow 0.12s;
-  border: 2px solid transparent;
-  position: relative;
+  min-height: 180px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.16s, background 0.16s;
 }
-
 .reserva-list-card:hover {
-  border: 2px solid #ff9100;
-  box-shadow: 0 4px 26px #ff910025;
+  background: linear-gradient(145deg, #201e1a, #2c2c2c);
+  border: 1.2px solid #ff9600cc;
+  box-shadow: 0 0 12px rgba(255, 150, 0, 0.25);
+  transform: translateY(-4px);
 }
 
 .reserva-list-info {
-  color: #fff;
-  font-size: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .reserva-list-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
+  font-size: 1.01rem;
+  margin-bottom: 1px;
 }
 
-.reserva-list-row .label {
-  font-weight: bold;
-  color: #ff9100;
-  min-width: 90px;
-  font-size: 0.99rem;
+.label {
+  color: #bcbcbc;
+  font-weight: 500;
+  min-width: 82px;
 }
 
-.reserva-list-row .value {
+.value {
   color: #fff;
-  font-size: 0.99rem;
+  font-weight: 600;
   word-break: break-word;
 }
 
-.estado {
-  text-transform: capitalize;
-  padding: 2px 8px;
+.estado-select {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: 1.2px solid #444;
+  padding: 6px 12px;
   border-radius: 6px;
-  font-size: 0.98rem;
-  font-weight: bold;
+  font-size: 0.96rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border 0.2s, background-color 0.2s;
+  appearance: none;
 }
-.estado.pendiente {
-  background: #4c4c00;
-  color: #ffe13b;
+
+.estado-select:hover {
+  border-color: #ff9600;
+  background-color: #2a2a2a;
 }
-.estado.confirmada {
-  background: #0c4937;
-  color: #51ffa5;
+.estado-select:focus {
+  border-color: #ff9600;
+  background-color: #2f2f2f;
 }
-.estado.cancelada {
-  background: #402020;
-  color: #ff5656;
+
+.estado-select.pendiente {
+  border-color: #ffae42;
+  background-color: #2e1e00;
+  color: #ffae42;
+}
+.estado-select.confirmada {
+  border-color: #42ff63;
+  background-color: #002e10;
+  color: #42ff63;
+}
+.estado-select.cancelada {
+  border-color: #ff6161;
+  background-color: #2e0000;
+  color: #ff6161;
 }
 
 .reserva-list-actions {
   display: flex;
   gap: 13px;
-  margin-top: 18px;
-  justify-content: flex-end;
+  margin-top: 22px;
 }
 
-.editar-btn {
-  background: #ff9100;
-  color: #fff;
+.editar-btn, .borrar-btn {
   border: none;
+  border-radius: 8px;
   padding: 9px 20px;
-  border-radius: 7px;
-  font-size: 1.04rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.13s;
-  box-shadow: 0 1.5px 7px #ff91002d;
+  transition: background 0.15s, color 0.13s, transform 0.15s;
+}
+.editar-btn {
+  background: #ff9600;
+  color: #fff;
 }
 .editar-btn:hover {
-  background: #ffa63a;
-  color: #232323;
+  background: #ffa73a;
+  transform: scale(1.03);
 }
-
 .borrar-btn {
-  background: #ff5555;
-  color: #fff;
-  border: none;
-  padding: 9px 20px;
-  border-radius: 7px;
-  font-size: 1.04rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.13s;
+  background: #181818;
+  color: #ff6161;
+  border: 1.2px solid #ff61619a;
 }
 .borrar-btn:hover {
-  background: #ff8989;
-  color: #232323;
+  background: #291818;
+  color: #fff;
+  transform: scale(1.03);
 }
 
-@media (max-width: 700px) {
+.reserva-list-vacio {
+  color: #bbbbbb;
+  background: #18181c;
+  border-radius: 10px;
+  margin: 60px auto 0 auto;
+  padding: 30px 26px;
+  font-size: 1.13rem;
+  max-width: 400px;
+  text-align: center;
+  border: 1.2px solid #23243a;
+}
+
+@media (max-width: 900px) {
+  .reserva-list-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 30px 4vw 20px 4vw;
+  }
+}
+
+@media (max-width: 600px) {
   .reserva-list-grid {
     grid-template-columns: 1fr;
-    gap: 13px;
-    padding: 10px 1vw 24px 1vw;
+    gap: 10px;
+    padding: 16px 2vw 16px 2vw;
   }
-  .reserva-list-card {
-    padding: 17px 10px 13px 12px;
-    min-height: 0;
+
+  .reserva-list-vacio, .alert-danger {
+    font-size: 0.99rem;
+    padding: 14px 7px;
   }
-  .reserva-list-row .label {
-    min-width: 72px;
-    font-size: .97rem;
+
+  .reserva-list-fecha-selector {
+    font-size: 0.95rem;
+    padding: 18px 8px;
   }
-  .reserva-list-actions {
-    flex-direction: column;
-    gap: 7px;
-    margin-top: 11px;
-  }
-  .editar-btn, .borrar-btn {
-    width: 100%;
-    padding: 11px 0;
-    font-size: .98rem;
+
+  .reserva-list-fecha-selector input[type="date"] {
+    width: 90%;
   }
 }

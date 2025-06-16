@@ -1,42 +1,40 @@
 <div class="login-wrapper">
-    <div class="login-left">
-      <h1>¿Listo para tu próxima<br />experiencia gastronómica?</h1>
-    </div>
-  
-    <div class="login-right">
-      <h2>Inicia sesión</h2>
-      <form (ngSubmit)="onSubmit()" class="login-form">
-        <div class="form-group">
-          <input
-            type="email"
-            placeholder="Correo electrónico"
-            [(ngModel)]="username"
-            name="username"
-            required
-          />
-        </div>
-        <div class="form-group password-group">
-          <input
-            [type]="showPassword ? 'text' : 'password'"
-            placeholder="Contraseña"
-            [(ngModel)]="password"
-            name="password"
-            required
-          />
-          <i class="toggle-password" (click)="showPassword = !showPassword">
-            👁️
-          </i>
-        </div>
-        <a class="forgot-password" href="#">¿Te olvidaste la contraseña?</a>
-        <button type="submit" class="login-button">Iniciar sesión</button>
-      </form>
-  
-      <button class="google-button">
-        <img src="assets/icons/google.png" alt="Google" />
-        Iniciar con Google
-      </button>
-  
-      <p *ngIf="error" class="error-message">{{ error }}</p>
-    </div>
+  <div class="login-left">
+    <div class="login-bg"></div>
+    <h1>¿Listo para tu próxima<br>experiencia gastronómica?</h1>
   </div>
-  
+  <div class="login-right">
+    <h2>Inicia sesión</h2>
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group password-group">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Contraseña"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <button type="button" class="toggle-password" (click)="showPassword = !showPassword" tabindex="-1">
+          <!-- SVG Ojo -->
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#999" stroke-width="2"><ellipse cx="12" cy="12" rx="8" ry="5"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </button>
+      </div>
+      <a class="forgot-password" href="#">¿Te olvidaste la contraseña?</a>
+      <button type="submit" class="login-button">Iniciar sesión</button>
+    </form>
+    <button class="google-button">
+      <img src="https://img.icons8.com/color/48/google-logo.png" alt="Google" />
+      Iniciar con Google
+    </button>
+    <p *ngIf="error" class="error-message">{{ error }}</p>
+  </div>
+</div>

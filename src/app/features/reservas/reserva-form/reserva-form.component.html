@@ -1,4 +1,4 @@
-<div class="reserva-wrapper">
+<div class="reserva-fullpage">
   <div class="reserva-left">
     <div class="reserva-img-bg">
       <div class="reserva-overlay"></div>
@@ -9,36 +9,38 @@
     </div>
   </div>
   <div class="reserva-right">
-    <h2>Reserva tu mesa</h2>
-    <div *ngIf="restauranteNombre" class="restaurante-nombre">
-      <strong>{{ restauranteNombre }}</strong>
+    <div class="reserva-form-panel">
+      <h2>Reserva tu mesa</h2>
+      <div *ngIf="restauranteNombre" class="restaurante-nombre">
+        <span>{{ restauranteNombre }}</span>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="reserva-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fecha*</label>
+            <input type="date" formControlName="fechaReserva" required />
+          </div>
+          <div class="form-group">
+            <label>Hora*</label>
+            <input type="time" formControlName="horaReserva" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Número de personas*</label>
+            <input type="number" min="1" formControlName="numeroPersonas" required />
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label>Observaciones</label>
+          <input type="text" formControlName="comentarios" placeholder="(Opcional)" />
+        </div>
+        <button type="submit" class="main-button" [disabled]="form.invalid || loading">
+          {{ loading ? 'Reservando...' : 'Reservar mesa' }}
+        </button>
+      </form>
+      <div *ngIf="success" class="success-message">{{ success }}</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="reserva-form">
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Fecha</mat-label>
-        <input matInput formControlName="fechaReserva" type="date" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Hora</mat-label>
-        <input matInput formControlName="horaReserva" type="time" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Número de personas</mat-label>
-        <input matInput formControlName="numeroPersonas" type="number" min="1" />
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>ID Turno</mat-label>
-        <input matInput formControlName="turnoId" type="number" required>
-      </mat-form-field>
-      <mat-form-field appearance="fill" class="reserva-field">
-        <mat-label>Observaciones</mat-label>
-        <input matInput formControlName="comentarios" />
-      </mat-form-field>
-      <button mat-raised-button color="accent" class="reserva-btn" type="submit" [disabled]="form.invalid || loading">
-        {{ loading ? 'Reservando...' : 'Reservar mesa' }}
-      </button>
-    </form>
-    <div *ngIf="success" class="success-message">{{ success }}</div>
-    <div *ngIf="error" class="error-message">{{ error }}</div>
   </div>
 </div>

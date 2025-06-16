@@ -1,73 +1,58 @@
-<div class="reserva-wrapper">
-  <!-- Columna izquierda: mensaje de bienvenida -->
+<div class="reserva-fullpage">
+  <!-- Mensaje de bienvenida -->
   <div class="reserva-welcome">
-    <h1>¡Edita tu reserva en segundos!</h1>
-    <p>Revisa tus datos, haz los cambios necesarios y confirma.<br>
+    <h1>¡Edita tu reserva<br>en segundos!</h1>
+    <p>Revisa los datos, haz los cambios que necesites y confirma tu reserva fácilmente.</p>
   </div>
 
-  <!-- Columna derecha: formulario de edición -->
+  <!-- Panel de formulario -->
   <div class="reserva-form-panel">
-    <h2>Editar reserva</h2>
-    <div *ngIf="restauranteNombre" class="restaurante-nombre">
-      <strong>{{ restauranteNombre }}</strong>
+    <div class="form-header">
+      <h2>Editar reserva</h2>
+      <div *ngIf="restauranteNombre" class="restaurante-nombre">
+        <span>{{ restauranteNombre }}</span>
+      </div>
     </div>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="reserva-form">
-      <div class="form-group">
-        <label>Fecha*</label>
-        <input
-          type="date"
-          formControlName="fechaReserva"
-          required
-        />
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha*</label>
+          <input type="date" formControlName="fechaReserva" required />
+        </div>
+        <div class="form-group">
+          <label>Hora*</label>
+          <input type="time" formControlName="horaReserva" required />
+        </div>
       </div>
-      <div class="form-group">
-        <label>Hora*</label>
-        <input
-          type="time"
-          formControlName="horaReserva"
-          required
-        />
+      <div class="form-row">
+        <div class="form-group">
+          <label>Número de personas*</label>
+          <input type="number" min="1" formControlName="numeroPersonas" required />
+        </div>
+
       </div>
-      <div class="form-group">
-        <label>Número de personas*</label>
-        <input
-          type="number"
-          min="1"
-          formControlName="numeroPersonas"
-          required
-        />
-      </div>
-      <div class="form-group">
-        <label>ID Turno*</label>
-        <input
-          type="number"
-          formControlName="turnoId"
-          required
-        />
-      </div>
-      <div class="form-group">
+      <div class="form-group full-width">
         <label>Observaciones</label>
-        <input
-          type="text"
-          formControlName="comentarios"
-        />
+        <input type="text" formControlName="comentarios" placeholder="(Opcional)" />
       </div>
-      <button
-        type="submit"
-        class="reserva-btn"
-        [disabled]="form.invalid || loading"
-      >
-        {{ loading ? 'Guardando...' : 'Guardar cambios' }}
-      </button>
-      <button
-        type="button"
-        class="cancel-btn"
-        (click)="irAMisReservas()"
-      >
-        Cancelar
-      </button>
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="main-button"
+          [disabled]="form.invalid || loading"
+        >
+          {{ loading ? 'Guardando...' : 'Guardar cambios' }}
+        </button>
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="irAMisReservas()"
+        >
+          Cancelar
+        </button>
+      </div>
+      <div *ngIf="success" class="success-message">{{ success }}</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
     </form>
-    <div *ngIf="success" class="success-message">{{ success }}</div>
-    <div *ngIf="error" class="error-message">{{ error }}</div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/enviroments';
 
@@ -13,12 +13,6 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  /**
-   * Realiza una solicitud de autenticación al backend.
-   * @param username - Nombre de usuario
-   * @param password - Contraseña
-   * @returns Observable con el token
-   */
   login(username: string, password: string): Observable<{ token: string }> {
     return this.http.post<{ token: string }>(
       `${environment.apiUrl}/v1/authenticate`,
@@ -29,19 +23,11 @@ export class AuthService {
     );
   }
 
-  /**
-   * Almacena el token en memoria y en localStorage.
-   * @param token - JWT recibido del backend
-   */
   setToken(token: string): void {
     this.token.next(token);
-    localStorage.setItem('token', token); // ⬅️ guarda en el navegador
+    localStorage.setItem('token', token);
   }
 
-  /**
-   * Devuelve el token desde memoria o desde localStorage.
-   * @returns Token o null
-   */
   getToken(): string | null {
     const current = this.token.value;
     if (current) return current;
@@ -55,43 +41,61 @@ export class AuthService {
     return null;
   }
 
-  /**
-   * Devuelve un observable con el estado de autenticación.
-   */
   isLoggedIn(): Observable<boolean> {
     return this.token.asObservable().pipe(
       map((token: string | null) => !!token)
     );
   }
 
-  /**
-   * Limpia el token y redirige al inicio.
-   */
   logout(): void {
     this.token.next(null);
     localStorage.removeItem('token');
     this.router.navigate(['/']);
   }
 
+  getUserId(): number | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.userId || payload.id || null;
+    } catch (e) {
+      return null;
+    }
+  }
 
   /**
- * Decodifica el token JWT y saca el userId (o sub, o username, según tu backend)
- */
-getUserId(): number | null {
+   * Obtiene el rol del usuario desde el token JWT.
+   * El campo puede ser 'role', 'roles', o 'authorities' según tu backend.
+   */getUserRole(): string | null {
   const token = this.getToken();
   if (!token) return null;
 
   try {
-    // El payload está en la segunda parte del JWT, base64url
     const payload = JSON.parse(atob(token.split('.')[1]));
-    // Ajusta el campo según tu backend: userId, sub, id, etc.
-    return payload.userId || payload.id || null;
-  } catch (e) {
+
+    // si es un array de roles:
+    const rawRole = payload.role || payload.roles?.[0] || payload.authorities?.[0] || null;
+
+    if (!rawRole) return null;
+
+    // Elimina el prefijo "ROLE_" para trabajar más limpio
+    return rawRole.replace('ROLE_', '');
+  } catch {
     return null;
   }
 }
+isOwner(): boolean {
+  return this.getUserRole() === 'OWNER';
+}
 
+isClient(): boolean {
+  return this.getUserRole() === 'USER';
+}
 
- 
+isAdmin(): boolean {
+  return this.getUserRole() === 'ADMIN';
+}
 
 }

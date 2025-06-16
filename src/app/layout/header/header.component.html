@@ -1,27 +1,46 @@
 <header class="header">
-    <div class="header-logo">
-      <a href="/">🍽️ TicketLogger</a>
-    </div>
-  
-    <nav class="header-nav" [class.open]="menuOpen">
-      <li *ngIf="isLoggedIn"><a routerLink="/restaurants">Restaurantes</a></li>
-      <li *ngIf="isLoggedIn"><a routerLink="/mis-reservas">Mis Reservas</a></li>
-      <li *ngIf="isLoggedIn"><a routerLink="/panel-solicitudes">Solicitudes</a></li>
-     <li *ngIf="isLoggedIn"><a routerLink="/solicitar-restaurante">Unete</a></li>
+  <div class="header-logo">
+    <a routerLink="/">SavoirTable</a>
+  </div>
 
+  <!-- Menú de navegación -->
+  <nav class="header-nav" [class.open]="menuOpen">
+    <ul>
+      <!-- SOLO PARA ROLE = USER -->
+      <li *ngIf="isLoggedIn && userRole === 'USER'">
+        <a routerLink="/restaurants" (click)="closeMenu()">Restaurantes</a>
+      </li>
+      <li *ngIf="isLoggedIn && userRole === 'USER'">
+        <a routerLink="/mis-reservas" (click)="closeMenu()">Mis Reservas</a>
+      </li>
 
-    </nav>
-  
+      <!-- SOLO PARA ROLE = ADMIN -->
+      <li *ngIf="isLoggedIn && userRole === 'ADMIN'">
+        <a routerLink="/panel-solicitudes" (click)="closeMenu()">Solicitudes</a>
+      </li>
+
+      <!-- SOLO PARA ROLE = OWNER -->
+      <li *ngIf="isLoggedIn && userRole === 'OWNER'">
+        <a routerLink="/mis-restaurantes" (click)="closeMenu()">Mis restaurantes</a>
+      </li>
+
+      <!-- VISIBLE PARA OWNER Y USER -->
+      <li *ngIf="isLoggedIn && (userRole === 'OWNER' || userRole === 'USER')">
+        <a routerLink="/solicitar-restaurante" (click)="closeMenu()">Únete</a>
+      </li>
+     
+    </ul>
+  </nav>
+
+  <!-- Acciones en modo escritorio -->
   <div class="header-actions">
-  <button class="btn-outline" (click)="irALogin()" *ngIf="!isLoggedIn">Iniciar sesión</button>
-  <button class="btn-primary" (click)="irARegistro()" *ngIf="!isLoggedIn">Registrarse</button>
-  <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
-</div>
+    <button class="btn-outline" (click)="irALogin()" *ngIf="!isLoggedIn">Iniciar sesión</button>
+    <button class="btn-primary" (click)="irARegistro()" *ngIf="!isLoggedIn">Registrarse</button>
+    <button class="btn-logout" (click)="logout()" *ngIf="isLoggedIn">Logout</button>
+  </div>
 
-
-  
-    <button class="hamburger" (click)="toggleMenu()" aria-label="Menú">
-      <i class="fas fa-bars"></i>
-    </button>
-  </header>
-  
+  <!-- Botón hamburguesa -->
+  <button class="hamburger" (click)="toggleMenu()" aria-label="Menú">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>

@@ -1,35 +1,31 @@
-<div class="restaurants-page">
+<div class="restaurants-fullpage">
   <h2>Restaurantes</h2>
 
-  <!-- Filtros -->
   <div class="filters">
-    <button mat-button color="primary">Fecha</button>
-    <button mat-button color="primary">Precio</button>
-    <button mat-button color="primary">Capacidad</button>
-
-    <mat-form-field appearance="outline" class="search-bar">
-      <mat-label>Buscar</mat-label>
-      <input matInput [formControl]="filtro" placeholder="Nombre o dirección" />
-    </mat-form-field>
+    <input
+      class="search-bar"
+      type="text"
+      [formControl]="filtro"
+      placeholder="Buscar por nombre o dirección"
+    />
   </div>
 
-  <div *ngIf="error() as err" class="error-message">{{ err }}</div>
 
-  <!-- Grid -->
+
   <div class="restaurant-grid">
     <div
-    class="restaurant-card"
-    *ngFor="let restaurant of filteredData()"
-
-    (click)="goToReservaForm(restaurant.id)">  
-      <div class="image-placeholder"></div>
+      class="restaurant-card"
+      *ngFor="let restaurant of filteredData"
+      (click)="goToReservaForm(restaurant.id)"
+    >
+      <div class="logo-placeholder">
+        {{ restaurant.nombre ? restaurant.nombre.charAt(0).toUpperCase() : '' }}
+      </div>
       <div class="card-content">
         <h3>{{ restaurant.nombre }}</h3>
         <p>{{ restaurant.direccion }}</p>
-        <span>Capacidad: {{ restaurant.capacidad }}</span>
+        <span class="capacity">Capacidad: {{ restaurant.capacidad }}</span>
       </div>
-     
-
     </div>
   </div>
 </div>

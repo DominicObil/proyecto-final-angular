@@ -23,9 +23,19 @@ export class LoginComponent {
     this.auth.login(this.username, this.password).subscribe({
       next: (res) => {
         this.auth.setToken(res.token);
-        this.router.navigate(['/restaurants']);
+
+        const role = this.auth.getUserRole(); // 👈 Asegúrate de que este método existe
+
+        // Redirigir según el rol
+        if (role === 'ADMIN') {
+          this.router.navigate(['/panel-solicitudes']);
+        } else if (role === 'OWNER') {
+          this.router.navigate(['/mis-restaurantes']);
+        } else {
+          this.router.navigate(['/restaurants']);
+        }
       },
-      error: (err) => {
+      error: () => {
         this.error = 'Usuario y contraseña inválido';
       }
     });

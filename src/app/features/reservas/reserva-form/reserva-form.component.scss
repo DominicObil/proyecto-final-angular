@@ -1,190 +1,256 @@
-.reserva-wrapper {
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
+.reserva-fullpage {
   display: flex;
-  min-height: 100vh;
-  background: #181818;
-  font-family: 'Montserrat', 'Arial', sans-serif;
+  flex-direction: row;
+
+  background: #000;
+
 }
 
 .reserva-left {
-  flex: 1.1;
-  min-width: 320px;
-  position: relative;
+  flex: 1.5;
+  min-width: 0;
+  max-width: 65vw;
   display: flex;
   align-items: stretch;
+  position: relative;
+  background: #000;
 }
 
 .reserva-img-bg {
+  flex: 1;
   width: 100%;
-  height: 100%;
-  background-image: url("../../../../img/ChatGPT\ Image\ 11\ jun\ 2025\,\ 12_58_21.png");
-  min-height: 350px;
+  height: 100vh;
+  min-height: 480px;
   position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+   background-image: url('../../../../img/ChatGPT\ Image\ 11\ jun\ 2025\,\ 15_48_27.png');
 }
 
 .reserva-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, #111c 80%, transparent 100%);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000b;
+  z-index: 1;
 }
 
 .reserva-msg {
-  position: absolute;
-  left: 40px;
-  bottom: 38px;
+  position: relative;
   z-index: 2;
   color: #fff;
-  text-shadow: 0 4px 18px #000c;
-  max-width: 88%;
+  text-align: left;
+  padding: 0 6vw;
+  max-width: 500px;
 }
 
 .reserva-msg h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin: 0 0 12px 0;
+  font-size: 2.5rem;
+  font-weight: 800;
   line-height: 1.13;
+  margin-bottom: 24px;
+  margin-top: 0;
+  letter-spacing: 0.6px;
+  text-shadow: 0 2px 16px #000b;
 }
 
 .reserva-msg p {
-  font-size: 1.1rem;
-  margin: 0;
-  color: #fff;
-  opacity: 0.9;
+  font-size: 1.18rem;
+  font-weight: 400;
+  color: #e2e2e2;
+  margin-top: 0;
+  text-shadow: 0 1px 10px #000a;
 }
 
+/* Panel de formulario a la derecha */
 .reserva-right {
   flex: 1;
-  background-color: #000;
   min-width: 340px;
-  padding: 54px 38px 38px 38px;
+  background: #000;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  box-shadow: -10px 0 44px rgba(0,0,0,0.18);
+  justify-content: center;
+  padding: 0;
 }
 
-.reserva-right h2 {
+.reserva-form-panel {
+  width: 100%;
+  max-width: 420px;
+  background: #000;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 44px 0;
+}
+
+.reserva-form-panel h2 {
+  font-size: 1.33rem;
+  font-weight: 700;
   color: #fff;
-  font-size: 1.35rem;
-  font-weight: bold;
-  margin-bottom: 12px;
-  letter-spacing: .3px;
+  margin-bottom: 28px;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .restaurante-nombre {
-  color: #ff9100;
-  margin-bottom: 16px;
-  text-align: center;
-  font-size: 1.09rem;
-  letter-spacing: .5px;
+  font-size: 1.03rem;
+  font-weight: 600;
+  color: #6c63ff;
+  background: #16181c;
+  border-radius: 6px;
+  padding: 6px 14px;
+  display: inline-block;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+  margin-bottom: 15px;
 }
 
+/* Formulario */
 .reserva-form {
-  width: 100%;
-  max-width: 340px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
-/* Angular Material field override */
-::ng-deep .reserva-field .mat-form-field-flex {
-  background: #181818 !important;
-  border-radius: 8px !important;
-  color: #fff !important;
-  box-shadow: none !important;
+.form-row {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 14px;
 }
-::ng-deep .reserva-field .mat-form-field-infix {
-  color: #fff !important;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
-::ng-deep .reserva-field .mat-input-element {
-  color: #fff !important;
-  background: transparent !important;
-  font-size: 1rem;
-  padding: 13px 12px !important;
-}
-::ng-deep .reserva-field .mat-form-field-label {
-  color: #ff9100 !important;
-  font-size: 1rem;
-  opacity: 0.97 !important;
-}
-::ng-deep .reserva-field.mat-form-field-appearance-fill .mat-form-field-underline {
-  display: none !important;
-}
-::ng-deep .reserva-field.mat-form-field-appearance-fill .mat-form-field-ripple {
-  display: none !important;
-}
-::ng-deep .reserva-field .mat-form-field-wrapper {
-  padding-bottom: 0 !important;
-}
-
-.reserva-btn {
+.form-group.full-width {
   width: 100%;
-  background: #ff9100 !important;
-  color: #fff !important;
-  font-weight: bold !important;
-  font-size: 1.09rem !important;
-  border-radius: 8px !important;
-  margin-top: 6px;
-  padding: 13px 0 !important;
-  box-shadow: 0 3px 14px rgba(255,145,0,0.13);
-  transition: background 0.16s;
-  letter-spacing: .5px;
+  margin-bottom: 12px;
+}
+.form-group label {
+  color: #b1b1b1;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+.reserva-form input[type="date"],
+.reserva-form input[type="time"],
+.reserva-form input[type="number"],
+.reserva-form input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #35395a;
+  background: #191921;
+  color: #ededed;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: border 0.2s, background 0.2s;
+  margin-bottom: 0;
+  box-sizing: border-box;
+}
+.reserva-form input:focus {
+  border-color: #6c63ff;
+  background: #22234d;
 }
 
-.reserva-btn:disabled {
+/* Botón igual que toda tu app */
+.main-button {
+  width: 100%;
+  padding: 13px 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff9600 30%, #ff7300 90%);
+  color: #fff;
+  border: none;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  margin-top: 18px;
+  margin-bottom: 0;
+  transition: background 0.16s, box-shadow 0.15s;
+  box-shadow: 0 2px 16px 0 #ff73005a;
+}
+.main-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff7300 10%, #ffb52e 100%);
+}
+.main-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  background: #333;
 }
 
-.reserva-btn:hover:enabled {
-  background: #ffb36b !important;
-  color: #232323 !important;
-}
-
+/* Mensajes de éxito y error */
 .success-message {
-  color: #51ffac;
+  color: #19ce88;
+  background: #122f24;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 1rem;
   margin-top: 16px;
-  font-size: .98rem;
   text-align: center;
 }
 .error-message {
-  color: #ff6d6d;
-  margin-top: 16px;
-  font-size: .98rem;
+  color: #ff6161;
+  background: #1b1111;
+  border-radius: 6px;
+  padding: 9px 14px;
+  font-size: 1rem;
+  margin-top: 15px;
   text-align: center;
 }
 
-@media (max-width: 950px) {
-  .reserva-msg { left: 16px; bottom: 16px; }
-  .reserva-right, .reserva-left { padding: 26px 10px; }
-  .reserva-msg h1 { font-size: 1.24rem; }
-  .reserva-msg p { font-size: 0.98rem; }
+/* Responsive */
+@media (max-width: 1100px) {
+  .reserva-left { max-width: 56vw; }
 }
-
-@media (max-width: 650px) {
-  .reserva-wrapper {
+@media (max-width: 900px) {
+  .reserva-fullpage {
     flex-direction: column;
-    min-height: 100vh;
+    min-height: auto;
   }
   .reserva-left, .reserva-right {
-    width: 100%;
+    max-width: 100vw;
     min-width: 0;
-    box-shadow: none;
+    width: 100vw;
+    height: auto;
     padding: 0;
   }
-  .reserva-right {
-    padding: 32px 5vw 26px 5vw;
+  .reserva-img-bg {
+    height: 200px;
+    min-height: 120px;
+    max-height: 340px;
   }
   .reserva-msg {
-    position: static;
-    text-align: left;
-    padding: 22px 14px 0 14px;
-    margin-bottom: 8px;
-    text-shadow: 0 2px 6px #0007;
+    padding: 0 8vw;
+    text-align: center;
+    width: 100%;
   }
-  .reserva-img-bg { min-height: 140px; }
+  .reserva-right {
+    padding: 0 4vw;
+  }
+  .reserva-form-panel {
+    padding: 28px 0;
+  }
+}
+@media (max-width: 600px) {
+  .reserva-form-panel {
+    padding: 12px 0;
+  }
+  .reserva-msg {
+    padding: 0 3vw;
+    font-size: 1rem;
+  }
+  .reserva-form-panel h2 {
+    font-size: 1.09rem;
+  }
 }

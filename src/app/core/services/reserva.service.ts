@@ -57,6 +57,26 @@ obtenerReservaPorId(id: number): Observable<any> {
     return this.http.get<any[]>(`${this.baseUrl}/restaurante/${restauranteId}`, { headers });
   }
 
+  getReservasPorRestauranteYFecha(restauranteId: number, fecha: string): Observable<any[]> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+  return this.http.get<any[]>(`${this.baseUrl}/restaurante/${restauranteId}/fecha/${fecha}`, { headers });
+}
+
+fetchRestaurantById(id: number): Observable<any> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+  return this.http.get(`${environment.apiUrl}/restaurantes/${id}`, { headers });
+}
+
+
+
+actualizarEstado(id: number, data: { estado: string }): Observable<any> {
+  const token = this.authService.getToken();
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+  return this.http.patch(`${this.baseUrl}/${id}/estado`, data, { headers });
+}
+
 
 
 

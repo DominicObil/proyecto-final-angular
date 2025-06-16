@@ -15,6 +15,8 @@ export class ReservasPorRestauranteComponent implements OnInit {
   loading = true;
   error: string | null = null;
   restauranteId!: number;
+  fechaActual = new Date().toISOString().split('T')[0]; // yyyy-MM-dd
+
 
   constructor(
     private reservaService: ReservaService,
@@ -23,29 +25,18 @@ export class ReservasPorRestauranteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('ngOnInit lanzado');
-    this.route.paramMap.subscribe(params => {
-      this.restauranteId = Number(params.get('restauranteId'));
-      console.log('restauranteId recibido:', this.restauranteId);
-      if (this.restauranteId) {
-        this.reservaService.getReservasPorRestaurante(this.restauranteId).subscribe({
-          next: (data) => {
-            console.log('Reservas recibidas:', data);
-            this.reservas = data;
-            this.loading = false;
-          },
-          error: (err) => {
-            console.error('Error en getReservasPorRestaurante:', err);
-            this.error = 'Error al cargar reservas';
-            this.loading = false;
-          }
-        });
-      } else {
-        this.error = 'No se proporcionó el ID del restaurante';
-        this.loading = false;
-      }
-    });
-  }
+  this.route.paramMap.subscribe(params => {
+    this.restauranteId = Number(params.get('restauranteId'));
+
+    if (this.restauranteId) {
+      this.filtrarPorFecha(this.fechaActual); // 👈 Mostrar reservas de hoy
+    } else {
+      this.error = 'No se proporcionó el ID del restaurante';
+      this.loading = false;
+    }
+  });
+}
+
 
   irAEditar(reservaId: number) {
     this.router.navigate(['/editar-reserva', reservaId]);
@@ -59,5 +50,52 @@ export class ReservasPorRestauranteComponent implements OnInit {
       });
     }
   }
+
+  filtrarPorFecha(fecha: string) {
+  this.loading = true;
+  this.reservaService.getReservasPorRestauranteYFecha(this.restauranteId, fecha).subscribe({
+    next: (data) => {
+      this.reservas = data;
+      this.loading = false;
+    },
+    error: () => {
+      this.error = 'Error al cargar reservas por fecha';
+      this.loading = false;
+    }
+  });
+}
+
+
+cambiarEstado(reservaId: number, nuevoEstado: string) {
+  const reserva = this.reservas.find(r => r.id === reservaId);
+  if (!reserva) return;
+
+  const actualizada = { estado: nuevoEstado };
+
+  this.reservaService.actualizarEstado(reservaId, actualizada).subscribe({
+    next: () => {
+      reserva.estado = nuevoEstado; // actualiza en la vista
+    },
+    error: () => alert('Error al actualizar el estado')
+  });
+}
+
+onFechaChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const fecha = input?.value;
+  if (fecha) {
+    this.filtrarPorFecha(fecha);
+  }
+}
+
+onEstadoChange(event: Event, reservaId: number) {
+  const select = event.target as HTMLSelectElement;
+  const nuevoEstado = select?.value;
+  if (nuevoEstado) {
+    this.cambiarEstado(reservaId, nuevoEstado);
+  }
+}
+
+
   
 }

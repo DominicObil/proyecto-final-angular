@@ -7,7 +7,10 @@ import { ForbiddenComponent } from './features/forbidden/forbidden.component';
 import { Error404Component } from './features/error404/error404.component';
 import { MisReservasComponent } from './features/reservas/mis-reservas/mis-reservas.component';
 import { RestaurantsListComponent } from './features/restaurants/restaurants-list/restaurants-list.component';
-import { SolicitudesRestaurantePanelComponent } from './features/restaurants/solicitudes-restaurante-panel/solicitudes-restaurante-panel.component';
+import { SolicitudesRestaurantePanelComponent } from './features/restaurants/solicitudes-restaurante-panel/solicitudes-restaurante-panel.component'
+;
+import { RestaurantsAdminComponent } from './features/restaurants/pages/restaurants-admin/restaurants-admin.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +22,11 @@ export const routes: Routes = [
     path: 'reservar/:restauranteId',
     loadComponent: () =>
       import('./features/reservas/reserva-form/reserva-form.component').then(m => m.ReservaFormComponent)
+  },
+    {
+    path: 'restaurants/admin',
+    component: RestaurantsAdminComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'reservas-restaurante/:restauranteId',

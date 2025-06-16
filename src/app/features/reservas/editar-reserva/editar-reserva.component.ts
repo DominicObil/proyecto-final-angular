@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReservaService } from '../../../core/services/reserva.service';
 import { RestaurantService } from '../../../core/services/restaurant.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -24,14 +25,15 @@ import { MatButtonModule } from '@angular/material/button';
 export class EditarReservaComponent implements OnInit {
   form: FormGroup;
   reservaId!: number;
+  restauranteId!: number;
   restauranteNombre: string = '';
   error: string | null = null;
-  loading = false; // ← Esto es lo que faltaba
+  loading = false;
   success: string = '';
-
 
   private reservaService = inject(ReservaService);
   private restaurantService = inject(RestaurantService);
+  private authService = inject(AuthService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -41,7 +43,7 @@ export class EditarReservaComponent implements OnInit {
       horaReserva: ['', Validators.required],
       numeroPersonas: [1, [Validators.required, Validators.min(1)]],
       comentarios: [''],
-      turnoId: [null, Validators.required],
+      turnoId: [null], // 👈 ya no es obligatorio
       restauranteId: [{ value: null, disabled: true }, Validators.required],
     });
   }
@@ -50,11 +52,10 @@ export class EditarReservaComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.reservaId = Number(id);
-      // 1. Carga la reserva
       this.reservaService.obtenerReservaPorId(this.reservaId).subscribe({
         next: (reserva) => {
           this.form.patchValue(reserva);
-          // 2. Trae el nombre del restaurante
+          this.restauranteId = reserva.restauranteId;
           this.restaurantService.fetchRestaurantById(reserva.restauranteId).subscribe({
             next: (restaurante) => this.restauranteNombre = restaurante.nombre,
             error: () => this.restauranteNombre = 'Restaurante no encontrado'
@@ -70,15 +71,28 @@ export class EditarReservaComponent implements OnInit {
   onSubmit(): void {
     if (this.form.valid) {
       const data = this.form.getRawValue();
+      this.loading = true;
+
       this.reservaService.actualizarReserva(this.reservaId, data).subscribe({
-        next: () => this.router.navigate(['/mis-reservas']),
-        error: (err) => this.error = '❌ Error al actualizar reserva',
+        next: () => this.redirigirTrasGuardar(),
+        error: () => {
+          this.error = '❌ Error al actualizar reserva';
+          this.loading = false;
+        }
       });
     }
   }
-  // En tu EditarReservaComponent
-irAMisReservas() {
-  this.router.navigate(['/mis-reservas']);
-}
 
+  redirigirTrasGuardar() {
+    const rol = this.authService.getUserRole();
+    if (rol === 'OWNER') {
+      this.router.navigate(['/mis-restaurantes']);
+    } else {
+      this.router.navigate(['/mis-reservas']);
+    }
+  }
+
+  irAMisReservas() {
+    this.redirigirTrasGuardar();
+  }
 }

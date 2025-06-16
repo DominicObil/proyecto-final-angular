@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
-import { Router, RouterLink } from '@angular/router'; // <-- Importa Router aquí
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -13,17 +14,23 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   menuOpen = false;
+  userRole: string | null = null;
 
   private subscription: Subscription | null = null;
 
   constructor(
     private authService: AuthService,
-    private router: Router // <-- Inyecta el Router aquí
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.subscription = this.authService.isLoggedIn().subscribe((loggedIn) => {
       this.isLoggedIn = loggedIn;
+      if (loggedIn) {
+        this.userRole = this.authService.getUserRole(); // <- asegúrate de que este método existe
+      } else {
+        this.userRole = null;
+      }
     });
   }
 
@@ -31,9 +38,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuOpen = !this.menuOpen;
   }
 
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']); // <-- Redirecciona a login después de logout
+    this.closeMenu();
+    this.router.navigate(['/login']);
   }
 
   irALogin() {
@@ -41,7 +53,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   irARegistro() {
-    this.router.navigate(['/register']); // Ajusta la ruta si es diferente en tu app
+    this.router.navigate(['/register']);
   }
 
   ngOnDestroy() {
