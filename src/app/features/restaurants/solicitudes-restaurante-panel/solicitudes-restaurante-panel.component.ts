@@ -13,7 +13,7 @@ export class SolicitudesRestaurantePanelComponent implements OnInit {
   solicitudes: any[] = [];
   loading = false;
   error: string | null = null;
-  processing: { [id: number]: boolean } = {}; // para bloquear botones por fila
+  processing: { [id: number]: boolean } = {};
 
   constructor(private solicitudService: SolicitudRestauranteService) {}
 
@@ -23,55 +23,42 @@ export class SolicitudesRestaurantePanelComponent implements OnInit {
 
   fetchSolicitudes() {
     this.loading = true;
-    this.error = null;
     this.solicitudService.getSolicitudes().subscribe({
       next: (data) => {
-        // Aquí el cambio importante
-        console.log('Respuesta de solicitudes:', data); // Para debug
-        this.solicitudes = data.content; // <-- Ahora toma solo el array real
+        this.solicitudes = data.content;
         this.loading = false;
       },
-      error: (err) => {
+      error: () => {
         this.error = 'Error al cargar solicitudes';
         this.loading = false;
       }
     });
   }
 
-aprobar(id: number) {
-  this.processing[id] = true;
-  this.error = null;
-  this.solicitudService.aprobarSolicitud(id).subscribe({
-    next: () => {
-      this.fetchSolicitudes(); // <--- recarga todo
-      this.processing[id] = false;
-    },
-    error: (err) => {
-      this.error = 'Error al aprobar la solicitud';
-      this.processing[id] = false;
-    }
-  });
-}
-
-
-rechazar(id: number) {
-  this.processing[id] = true;
-  this.error = null;
-  this.solicitudService.rechazarSolicitud(id).subscribe({
-    next: () => {
-      this.solicitudes = this.solicitudes.filter(s => s.id !== id);
-      this.processing[id] = false;
-    },
-    error: (err) => {
-      if (err.status === 404) {
+  aprobar(id: number) {
+    this.processing[id] = true;
+    this.solicitudService.aprobarSolicitud(id).subscribe({
+      next: () => {
+        // Elimina la solicitud aprobada del array
         this.solicitudes = this.solicitudes.filter(s => s.id !== id);
-        this.error = 'La solicitud ya no existe o fue procesada.';
-      } else {
-        this.error = 'Error al rechazar la solicitud';
+        this.processing[id] = false;
+      },
+      error: () => {
+        this.processing[id] = false;
       }
-      this.processing[id] = false;
-    }
-  });
-}
+    });
+  }
 
+  rechazar(id: number) {
+    this.processing[id] = true;
+    this.solicitudService.rechazarSolicitud(id).subscribe({
+      next: () => {
+        this.solicitudes = this.solicitudes.filter(s => s.id !== id);
+        this.processing[id] = false;
+      },
+      error: () => {
+        this.processing[id] = false;
+      }
+    });
+  }
 }

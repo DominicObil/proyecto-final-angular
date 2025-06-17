@@ -22,11 +22,21 @@ export class AuthService {
       }
     );
   }
+setToken(token: string): void {
+  this.token.next(token);
+  localStorage.setItem('token', token);
 
-  setToken(token: string): void {
-    this.token.next(token);
-    localStorage.setItem('token', token);
+  // EXTRA: guardar el username desde el token
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const username = payload.sub || payload.username || payload.user || null;
+    if (username) {
+      localStorage.setItem('username', username);
+    }
+  } catch (e) {
+    console.error('No se pudo extraer el username del token');
   }
+}
 
   getToken(): string | null {
     const current = this.token.value;
@@ -53,17 +63,14 @@ export class AuthService {
     this.router.navigate(['/']);
   }
 
-  getUserId(): number | null {
-    const token = this.getToken();
-    if (!token) return null;
 
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.userId || payload.id || null;
-    } catch (e) {
-      return null;
-    }
-  }
+  getUserById(id: number): Observable<any> {
+  const token = this.getToken();
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+  return this.http.get(`${environment.apiUrl}/users/${id}`, { headers });
+}
+
 
   /**
    * Obtiene el rol del usuario desde el token JWT.

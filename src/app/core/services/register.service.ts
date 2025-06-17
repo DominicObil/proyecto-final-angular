@@ -11,7 +11,9 @@ export class RegisterService {
 
   constructor(private http: HttpClient) {}
 
-  register(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, data);
+  register(data: any): Observable<string> {
+    return this.http.post(`${this.baseUrl}/register`, data, {
+      responseType: 'text' as const  // 🔧 Esta línea evita el intento de parseo JSON
+    });
   }
 }

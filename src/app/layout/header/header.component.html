@@ -1,7 +1,15 @@
 <header class="header">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <div class="header-logo">
     <a routerLink="/">SavoirTable</a>
   </div>
+
+  <!-- Botón hamburguesa -->
+  <button class="hamburger" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Menú">
+    <i class="fas fa-bars"></i>
+  </button>
 
   <!-- Menú de navegación -->
   <nav class="header-nav" [class.open]="menuOpen">
@@ -28,19 +36,13 @@
       <li *ngIf="isLoggedIn && (userRole === 'OWNER' || userRole === 'USER')">
         <a routerLink="/solicitar-restaurante" (click)="closeMenu()">Únete</a>
       </li>
-     
     </ul>
   </nav>
 
-  <!-- Acciones en modo escritorio -->
-  <div class="header-actions">
+  <!-- Acciones (login, registro, logout) -->
+  <div class="header-actions" *ngIf="!menuOpen">
     <button class="btn-outline" (click)="irALogin()" *ngIf="!isLoggedIn">Iniciar sesión</button>
     <button class="btn-primary" (click)="irARegistro()" *ngIf="!isLoggedIn">Registrarse</button>
     <button class="btn-logout" (click)="logout()" *ngIf="isLoggedIn">Logout</button>
   </div>
-
-  <!-- Botón hamburguesa -->
-  <button class="hamburger" (click)="toggleMenu()" aria-label="Menú">
-    <i class="fas fa-bars"></i>
-  </button>
 </header>

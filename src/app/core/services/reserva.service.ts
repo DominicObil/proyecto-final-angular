@@ -70,12 +70,19 @@ fetchRestaurantById(id: number): Observable<any> {
 }
 
 
-
 actualizarEstado(id: number, data: { estado: string }): Observable<any> {
   const token = this.authService.getToken();
-  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-  return this.http.patch(`${this.baseUrl}/${id}/estado`, data, { headers });
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.patch(`${this.baseUrl}/${id}/estado`, data, {
+    headers,
+    responseType: 'text' as const // 👈 ESTO es lo que evita el error
+  });
 }
+
 
 
 

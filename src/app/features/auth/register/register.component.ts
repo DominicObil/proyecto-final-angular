@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RegisterService } from '../../../core/services/register.service'; // Ajusta el path si lo tienes diferente
-import { CommonModule } from '@angular/common'; // <-- Importa esto
+import { RegisterService } from '../../../core/services/register.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
@@ -29,11 +29,14 @@ export class RegisterComponent {
   onSubmit() {
     this.success = null;
     this.error = null;
+
     if (this.registerForm.invalid) {
       this.error = 'Todos los campos obligatorios deben estar rellenos';
       return;
     }
+
     this.loading = true;
+
     this.registerService.register(this.registerForm.value).subscribe({
       next: () => {
         this.success = '¡Usuario registrado correctamente!';
@@ -42,13 +45,18 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.loading = false;
-        // Saca mensaje entendible si existe
-        this.error =
-          err.error?.message ||
-          err.error?.error ||
-          (typeof err.error === 'string' ? err.error : null) ||
-          'Error desconocido al registrar';
-        console.error('Error al registrar:', err);
+        console.error('Error completo:', err);
+
+        // Manejo seguro del error
+        if (typeof err.error === 'string') {
+          this.error = err.error;
+        } else if (err.error?.message) {
+          this.error = err.error.message;
+        } else if (err.error?.error) {
+          this.error = err.error.error;
+        } else {
+          this.error = 'Error desconocido al registrar';
+        }
       }
     });
   }

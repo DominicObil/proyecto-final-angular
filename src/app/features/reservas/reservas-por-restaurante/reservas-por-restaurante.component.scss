@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  background: #000;
+  height: 100%;
   font-family: 'Poppins', sans-serif;
+  background: #000;
 }
 
 .reserva-titulo {
@@ -21,7 +21,6 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: flex-start;
 }
 
 .reserva-list-loading {
@@ -47,43 +46,42 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 24px 0 12px 0;
+  padding: 24px 0 12px;
   color: #bcbcbc;
   font-size: 1.05rem;
-}
 
-.reserva-list-fecha-selector label {
-  margin-bottom: 8px;
-  font-weight: 500;
-  text-shadow: 0 0 4px rgba(255, 150, 0, 0.2);
-}
+  label {
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-shadow: 0 0 4px rgba(255, 150, 0, 0.2);
+  }
 
-.reserva-list-fecha-selector input[type="date"] {
-  appearance: none;
-  -webkit-appearance: none;
-  background-color: #1e1e1e;
-  color: #ffffff;
-  border: 1.2px solid #444;
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: border 0.2s, background-color 0.2s;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" opacity=".3"/><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 38px;
-}
+  input[type="date"] {
+    appearance: none;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1.2px solid #444;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border 0.2s, background-color 0.2s;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10h5v5H7z" opacity=".3"/><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 38px;
 
-.reserva-list-fecha-selector input[type="date"]:hover {
-  border-color: #ff9600;
-}
+    &:hover {
+      border-color: #ff9600;
+    }
 
-.reserva-list-fecha-selector input[type="date"]:focus {
-  outline: none;
-  border-color: #ff9600;
-  background-color: #2a2a2a;
+    &:focus {
+      outline: none;
+      border-color: #ff9600;
+      background-color: #2a2a2a;
+    }
+  }
 }
 
 .reserva-list-grid {
@@ -93,7 +91,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
   gap: 28px;
-  padding: 50px 32px 32px 32px;
+  padding: 50px 32px 32px;
   box-sizing: border-box;
 }
 
@@ -105,14 +103,14 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.16s, background 0.16s;
-}
-.reserva-list-card:hover {
-  background: linear-gradient(145deg, #201e1a, #2c2c2c);
-  border: 1.2px solid #ff9600cc;
-  box-shadow: 0 0 12px rgba(255, 150, 0, 0.25);
-  transform: translateY(-4px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.16s;
+
+  &:hover {
+    background: linear-gradient(145deg, #201e1a, #2c2c2c);
+    border: 1.2px solid #ff9600cc;
+    box-shadow: 0 0 12px rgba(255, 150, 0, 0.25);
+    transform: translateY(-4px);
+  }
 }
 
 .reserva-list-info {
@@ -127,18 +125,18 @@ html, body {
   align-items: center;
   font-size: 1.01rem;
   margin-bottom: 1px;
-}
 
-.label {
-  color: #bcbcbc;
-  font-weight: 500;
-  min-width: 82px;
-}
+  .label {
+    color: #bcbcbc;
+    font-weight: 500;
+    min-width: 82px;
+  }
 
-.value {
-  color: #fff;
-  font-weight: 600;
-  word-break: break-word;
+  .value {
+    color: #fff;
+    font-weight: 600;
+    word-break: break-word;
+  }
 }
 
 .estado-select {
@@ -152,72 +150,82 @@ html, body {
   cursor: pointer;
   transition: border 0.2s, background-color 0.2s;
   appearance: none;
-}
 
-.estado-select:hover {
-  border-color: #ff9600;
-  background-color: #2a2a2a;
-}
-.estado-select:focus {
-  border-color: #ff9600;
-  background-color: #2f2f2f;
-}
+  &:hover {
+    border-color: #ff9600;
+    background-color: #2a2a2a;
+  }
 
-.estado-select.pendiente {
-  border-color: #ffae42;
-  background-color: #2e1e00;
-  color: #ffae42;
-}
-.estado-select.confirmada {
-  border-color: #42ff63;
-  background-color: #002e10;
-  color: #42ff63;
-}
-.estado-select.cancelada {
-  border-color: #ff6161;
-  background-color: #2e0000;
-  color: #ff6161;
+  &:focus {
+    border-color: #ff9600;
+    background-color: #2f2f2f;
+  }
+
+  &.pendiente {
+    border-color: #ffae42;
+    background-color: #2e1e00;
+    color: #ffae42;
+  }
+
+  &.confirmada {
+    border-color: #42ff63;
+    background-color: #002e10;
+    color: #42ff63;
+  }
+
+  &.cancelada {
+    border-color: #ff6161;
+    background-color: #2e0000;
+    color: #ff6161;
+  }
 }
 
 .reserva-list-actions {
   display: flex;
   gap: 13px;
   margin-top: 22px;
-}
 
-.editar-btn, .borrar-btn {
-  border: none;
-  border-radius: 8px;
-  padding: 9px 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s, color 0.13s, transform 0.15s;
-}
-.editar-btn {
-  background: #ff9600;
-  color: #fff;
-}
-.editar-btn:hover {
-  background: #ffa73a;
-  transform: scale(1.03);
-}
-.borrar-btn {
-  background: #181818;
-  color: #ff6161;
-  border: 1.2px solid #ff61619a;
-}
-.borrar-btn:hover {
-  background: #291818;
-  color: #fff;
-  transform: scale(1.03);
+  .editar-btn,
+  .borrar-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.13s, transform 0.15s;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  .editar-btn {
+    background: #ff9600;
+    color: #fff;
+
+    &:hover {
+      background: #ffa73a;
+    }
+  }
+
+  .borrar-btn {
+    background: #181818;
+    color: #ff6161;
+    border: 1.2px solid #ff61619a;
+
+    &:hover {
+      background: #291818;
+      color: #fff;
+    }
+  }
 }
 
 .reserva-list-vacio {
   color: #bbbbbb;
   background: #18181c;
   border-radius: 10px;
-  margin: 60px auto 0 auto;
+  margin: 60px auto 0;
   padding: 30px 26px;
   font-size: 1.13rem;
   max-width: 400px;
@@ -229,7 +237,7 @@ html, body {
   .reserva-list-grid {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
-    padding: 30px 4vw 20px 4vw;
+    padding: 30px 4vw 20px;
   }
 }
 
@@ -237,10 +245,11 @@ html, body {
   .reserva-list-grid {
     grid-template-columns: 1fr;
     gap: 10px;
-    padding: 16px 2vw 16px 2vw;
+    padding: 16px 2vw;
   }
 
-  .reserva-list-vacio, .alert-danger {
+  .reserva-list-vacio,
+  .alert-danger {
     font-size: 0.99rem;
     padding: 14px 7px;
   }
@@ -248,9 +257,9 @@ html, body {
   .reserva-list-fecha-selector {
     font-size: 0.95rem;
     padding: 18px 8px;
-  }
 
-  .reserva-list-fecha-selector input[type="date"] {
-    width: 90%;
+    input[type="date"] {
+      width: 90%;
+    }
   }
 }

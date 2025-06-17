@@ -15,36 +15,38 @@ export class SolicitudRestauranteService {
     private authService: AuthService
   ) {}
 
-  crearSolicitud(data: any): Observable<any> {
+  private getHeaders(): HttpHeaders {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
-    return this.http.post(this.baseUrl, data, { headers });
   }
 
-  /** Obtiene solicitudes paginadas */
+  crearSolicitud(data: any): Observable<any> {
+    return this.http.post(this.baseUrl, data, {
+      headers: this.getHeaders()
+    });
+  }
+
   getSolicitudes(page = 0, size = 10): Observable<any> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
     return this.http.get<any>(
       `${this.baseUrl}/solicitudes?page=${page}&size=${size}`,
-      { headers }
+      { headers: this.getHeaders() }
     );
   }
 
-  /** Aprueba una solicitud (crea el restaurante real para ese owner) */
-  aprobarSolicitud(id: number): Observable<any> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
+  aprobarSolicitud(id: number): Observable<string> {
+    return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, {
+      headers: this.getHeaders(),
+      responseType: 'text' as const
+    });
   }
+rechazarSolicitud(id: number): Observable<string> {
+  return this.http.delete(`${this.baseUrl}/${id}/rechazar`, {
+    headers: this.getHeaders(),
+    responseType: 'text' as const
+  });
+}
 
-  /** Rechaza o elimina la solicitud (requiere endpoint DELETE en backend) */
-  rechazarSolicitud(id: number): Observable<any> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    return this.http.delete(`${this.baseUrl}/${id}`, { headers });
-  }
 }
